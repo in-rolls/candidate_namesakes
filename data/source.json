@@ -1,0 +1,8 @@
+{
+  "path": "data/raw/local_elections/candidates_bihar.parquet",
+  "repository": "https://github.com/in-rolls/local_elections",
+  "source_path": "data/master/candidates_bihar.parquet",
+  "commit": "112e86b749257aba5b10106f5727e36019e924f4",
+  "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
+  "rows": 1569245
+}

@@ -1,0 +1,27 @@
+{
+  "source": {
+    "path": "data/raw/local_elections/candidates_bihar.parquet",
+    "repository": "https://github.com/in-rolls/local_elections",
+    "source_path": "data/master/candidates_bihar.parquet",
+    "commit": "112e86b749257aba5b10106f5727e36019e924f4",
+    "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
+    "rows": 1569245
+  },
+  "outputs": [
+    {
+      "path": "data/release/contests.parquet",
+      "rows": 463524,
+      "sha256": "acc614a7fb81a2077c251d0f7ea854ac750ad587c2597ea220fe8443da8f86ff"
+    },
+    {
+      "path": "data/release/namesake_candidates.parquet",
+      "rows": 16862,
+      "sha256": "fe361a8413e1bed8f4735671efa7dde281218db1ce414994d8b7e8b951a9fb3f"
+    },
+    {
+      "path": "data/release/summary.csv",
+      "rows": 12,
+      "sha256": "e1355b3c9a5c9ce20691878ceb356fbd054f5cb416e4484713947b0c11984397"
+    }
+  ]
+}

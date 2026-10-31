@@ -1,0 +1,39 @@
+[project]
+name = "candidate-namesakes"
+version = "0.1.0"
+description = "Candidates who share a name with a rival in the same Indian local-election contest"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Gaurav Sood", email = "contact@gsood.com" }]
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["India", "Bihar", "elections", "panchayats", "candidates", "namesakes"]
+dependencies = [
+    "museclient",
+    "pandas>=2.2",
+    "pyarrow>=21",
+    "rapidfuzz>=3.14",
+]
+
+[project.urls]
+Repository = "https://github.com/in-rolls/candidate_namesakes"
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/candidate_namesakes"]
+
+[dependency-groups]
+dev = ["black>=25", "isort>=6", "flake8>=7", "pytest>=8"]
+
+[tool.isort]
+profile = "black"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-config", "--strict-markers"]
+
+[tool.uv.sources]
+museclient = { git = "https://github.com/gojiplus/museclient", rev = "2063b1b" }
