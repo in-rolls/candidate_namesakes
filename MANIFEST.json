@@ -11,17 +11,22 @@
     {
       "path": "data/release/contests.parquet",
       "rows": 463524,
-      "sha256": "acc614a7fb81a2077c251d0f7ea854ac750ad587c2597ea220fe8443da8f86ff"
+      "sha256": "f5bac8faaed43ac9915b1302d7de21f5c636e961a25d10b4cbb6743dcbe4cd4a"
     },
     {
       "path": "data/release/namesake_candidates.parquet",
-      "rows": 16862,
-      "sha256": "fe361a8413e1bed8f4735671efa7dde281218db1ce414994d8b7e8b951a9fb3f"
+      "rows": 39386,
+      "sha256": "968ebb8e08766d12e12b776f7fe6b07690aafe2d76abb77c42118ea1743d933b"
+    },
+    {
+      "path": "data/release/name_pairs.parquet",
+      "rows": 128741,
+      "sha256": "4a2097fd7b5f6f0cc73b12011a9ff0984a057ec8566d21a52f7dd765a94bae22"
     },
     {
       "path": "data/release/summary.csv",
       "rows": 12,
-      "sha256": "e1355b3c9a5c9ce20691878ceb356fbd054f5cb416e4484713947b0c11984397"
+      "sha256": "f263ff8e77f0215ca0af0eff676d75d16ddd247709c41c21885b91c4640be613"
     }
   ]
 }

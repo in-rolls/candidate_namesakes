@@ -19,6 +19,10 @@ from candidate_namesakes.names import exact_key, spelling_key
         ("ANIL KUMAR I", "ANIL KUMAR II"),
         ("SITA DEVI (II)", "SITA DEVI 2"),
         ("सीता देवी (१)", "सीता देवी"),
+        ("अंजु देवी -2", "अंजू देवी -१"),
+        ("RAJ KUMAR-II", "RAJ KUMAR -I"),
+        ("SUNITA DEVI1", "SUNITA DEVI 2"),
+        ("सुनीता देवी2", "सुनीता देवी"),
     ],
 )
 def test_same_spoken_name_shares_spelling_key(a, b):
@@ -52,3 +56,8 @@ def test_exact_key_keeps_spelling():
 def test_missing_name():
     assert exact_key(None) is None
     assert spelling_key("  ") is None
+
+
+def test_spaces_inside_a_name_do_not_split_it():
+    joined = spelling_key("राजकुमार सहनी").replace(" ", "")
+    assert spelling_key("राज कुमार सहनी").replace(" ", "") == joined

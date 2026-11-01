@@ -13,6 +13,7 @@ dependencies = [
     "pandas>=2.2",
     "pyarrow>=21",
     "rapidfuzz>=3.14",
+    "statsmodels>=0.15",
 ]
 
 [project.urls]

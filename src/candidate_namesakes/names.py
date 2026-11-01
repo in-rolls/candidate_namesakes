@@ -13,8 +13,13 @@ is a spelling choice the candidate lists make both ways (checked on Bihar).
 import re
 import unicodedata
 
-# The SEC numbers namesakes after the name: "(1)", "2", "01", "(१)", "II", "(II)".
-SEC_NUMBER = re.compile(r"(?:\s+|\s*\()\s*(?:[0-9०-९]+|I{1,3}|IV)\s*\)?\s*$")
+# The SEC numbers namesakes after the name: "(1)", "2", "01", "(१)", "II", "(II)",
+# "-2", "-II", or digits run onto the name ("DEVI1"). A Roman numeral needs its
+# own word, so RAVI keeps its I.
+SEC_NUMBER = re.compile(
+    r"(?:\s*-\s*|\s+|\s*\(\s*)(?:[0-9०-९]+|I{1,3}|IV)\s*\)?\s*$"
+    r"|(?<=[^\s\d०-९(-])[0-9०-९]+\s*$"
+)
 DEVANAGARI = re.compile(r"[ऀ-ॿ]")
 
 # Applied in order, after NFC normalization.
