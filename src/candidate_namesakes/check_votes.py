@@ -127,7 +127,7 @@ def vote_markdown(result, people):
 
 def main():
     source = json.loads(Path("data/source.json").read_text())
-    candidates = load(source["path"], source["sha256"])
+    candidates = load(source)
     pairs = pd.read_parquet("data/release/name_pairs.parquet")
     people = contests_with_votes(candidates)
     people["like_winner"] = resemblance_to(people, pairs, "is_winner")
@@ -154,6 +154,7 @@ def main():
     result = pd.concat(tables).round(3)
     RESULT.parent.mkdir(parents=True, exist_ok=True)
     result.to_csv(RESULT, index=False)
+    print(people.groupby("state").row_id.nunique())
     update_readme(vote_markdown(result, people), marker="votes")
     print(f"{people.row_id.nunique():,} contests with complete votes")
     pd.set_option("display.width", 200)

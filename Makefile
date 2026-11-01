@@ -1,12 +1,16 @@
 .PHONY: fetch build check-votes test lint
 
-SOURCE_URL = https://raw.githubusercontent.com/in-rolls/local_elections/112e86b749257aba5b10106f5727e36019e924f4/data/master/candidates_bihar.parquet
-SOURCE = data/raw/local_elections/candidates_bihar.parquet
+COMMIT = 112e86b749257aba5b10106f5727e36019e924f4
+BASE = https://raw.githubusercontent.com/in-rolls/local_elections/$(COMMIT)/data/master
+RAW = data/raw/local_elections
+STATES = bihar rajasthan
 
 fetch:
-	mkdir -p $(dir $(SOURCE))
-	curl -fL -o $(SOURCE) $(SOURCE_URL)
-	shasum -a 256 $(SOURCE)
+	mkdir -p $(RAW)
+	for state in $(STATES); do \
+		curl -fL -o $(RAW)/candidates_$$state.parquet $(BASE)/candidates_$$state.parquet; \
+	done
+	shasum -a 256 $(RAW)/*.parquet
 
 build:
 	uv run python -m candidate_namesakes.count_namesakes

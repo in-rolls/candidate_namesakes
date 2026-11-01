@@ -1,32 +1,44 @@
 {
   "source": {
-    "path": "data/raw/local_elections/candidates_bihar.parquet",
     "repository": "https://github.com/in-rolls/local_elections",
-    "source_path": "data/master/candidates_bihar.parquet",
     "commit": "112e86b749257aba5b10106f5727e36019e924f4",
-    "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
-    "rows": 1569245
+    "inputs": [
+      {
+        "state": "Bihar",
+        "path": "data/raw/local_elections/candidates_bihar.parquet",
+        "source_path": "data/master/candidates_bihar.parquet",
+        "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
+        "rows": 1569245
+      },
+      {
+        "state": "Rajasthan",
+        "path": "data/raw/local_elections/candidates_rajasthan.parquet",
+        "source_path": "data/master/candidates_rajasthan.parquet",
+        "sha256": "fd7e51d9944b4bd0508f4a14a0d51140151a6c16a7a12351b015ad1eeeb6c098",
+        "rows": 68202
+      }
+    ]
   },
   "outputs": [
     {
       "path": "data/release/contests.parquet",
-      "rows": 463524,
-      "sha256": "f5bac8faaed43ac9915b1302d7de21f5c636e961a25d10b4cbb6743dcbe4cd4a"
+      "rows": 474969,
+      "sha256": "aae6eac35c537cc79def5f56e57c1be50d8d904f088161e63f3e453ed4b1a993"
     },
     {
       "path": "data/release/namesake_candidates.parquet",
-      "rows": 39386,
-      "sha256": "968ebb8e08766d12e12b776f7fe6b07690aafe2d76abb77c42118ea1743d933b"
+      "rows": 42932,
+      "sha256": "2886cb0c48985e3ef966ee3f9644253fce212bb305c0b4d0c2bc2e0843990182"
     },
     {
       "path": "data/release/name_pairs.parquet",
-      "rows": 128741,
-      "sha256": "4a2097fd7b5f6f0cc73b12011a9ff0984a057ec8566d21a52f7dd765a94bae22"
+      "rows": 137914,
+      "sha256": "458e3009e6a5985e306b4ec19fa0eed118fc1c45d7bc37d50d0c5a32d4096806"
     },
     {
       "path": "data/release/summary.csv",
-      "rows": 12,
-      "sha256": "f263ff8e77f0215ca0af0eff676d75d16ddd247709c41c21885b91c4640be613"
+      "rows": 16,
+      "sha256": "20e0eec9a36a4bd5f01c558e688a47d05053cce0f46c742a7d9d44e18f3d9d60"
     }
   ]
 }

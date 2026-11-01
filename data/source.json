@@ -1,8 +1,20 @@
 {
-  "path": "data/raw/local_elections/candidates_bihar.parquet",
   "repository": "https://github.com/in-rolls/local_elections",
-  "source_path": "data/master/candidates_bihar.parquet",
   "commit": "112e86b749257aba5b10106f5727e36019e924f4",
-  "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
-  "rows": 1569245
+  "inputs": [
+    {
+      "state": "Bihar",
+      "path": "data/raw/local_elections/candidates_bihar.parquet",
+      "source_path": "data/master/candidates_bihar.parquet",
+      "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
+      "rows": 1569245
+    },
+    {
+      "state": "Rajasthan",
+      "path": "data/raw/local_elections/candidates_rajasthan.parquet",
+      "source_path": "data/master/candidates_rajasthan.parquet",
+      "sha256": "fd7e51d9944b4bd0508f4a14a0d51140151a6c16a7a12351b015ad1eeeb6c098",
+      "rows": 68202
+    }
+  ]
 }

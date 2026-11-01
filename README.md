@@ -2,10 +2,12 @@
 
 How often a local-election candidate faced a rival whose name a voter could
 mistake for theirs, in the same contest. Coverage so far: Bihar's 2016 and 2021
-panchayat elections, every seat in all six offices. Other states in the pooled
-[local_elections](https://github.com/in-rolls/local_elections) candidate tables
-(Rajasthan, Tamil Nadu, Uttar Pradesh, Uttarakhand) can be added as further
-inputs; each output row carries `state`.
+panchayat elections, every seat in all six offices, and Rajasthan's 2020
+sarpanch elections with the by-elections of 2021-22. These are the cycles for
+which the pooled [local_elections](https://github.com/in-rolls/local_elections)
+tables list every candidate; earlier cycles in both states list winners only.
+Tamil Nadu, Uttar Pradesh and Uttarakhand candidate tables can be added as
+further inputs; each output row carries `state`.
 
 A **contest** is one seat in one election: a gram panchayat's mukhiya, a ward,
 a panchayat samiti or zila parishad constituency, a gram kachahari's sarpanch or
@@ -30,28 +32,33 @@ in three widening tiers:
   are nothing alike (ANIL KUMAR SINGH, NIRMAL KUMAR SINGH). See
   [Look-alike names](#look-alike-names) for how 0.7 was chosen.
 
-## Results: Bihar
+## Results
 
 <!-- summary:start -->
 
-| Year | Office | Contests | Mean candidates | Mean namesakes, exact | Mean namesakes, spelling | Contests with a namesake, exact (%) | Contests with a namesake, spelling (%) | Contests with a look-alike (%) | Repeated records dropped |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
-| 2016 | Mukhiya (`gp_head`) | 7,995 | 12.0 | 0.34 | 0.37 | 13.8 | 14.5 | 26.4 | 131 |
-| 2016 | Ward member (`gp_ward`) | 98,088 | 2.8 | 0.02 | 0.02 | 0.9 | 0.9 | 2.2 | 107 |
-| 2016 | Panchayat samiti (`block_member`) | 10,839 | 7.4 | 0.11 | 0.12 | 5.3 | 5.7 | 13.2 | 75 |
-| 2016 | Zila parishad (`zp_member`) | 895 | 11.3 | 0.21 | 0.22 | 9.7 | 10.4 | 19.8 | 16 |
-| 2016 | Sarpanch (`kachahari_head`) | 7,915 | 5.7 | 0.07 | 0.07 | 3.4 | 3.6 | 8.4 | 78 |
-| 2016 | Panch (`kachahari_member`) | 93,019 | 1.5 | 0.00 | 0.00 | 0.1 | 0.2 | 0.4 | 41 |
-| 2021 | Mukhiya (`gp_head`) | 8,062 | 8.2 | 0.13 | 0.18 | 6.2 | 7.9 | 14.0 | 0 |
-| 2021 | Ward member (`gp_ward`) | 109,583 | 4.6 | 0.04 | 0.06 | 2.1 | 2.7 | 5.7 | 1 |
-| 2021 | Panchayat samiti (`block_member`) | 11,075 | 6.7 | 0.07 | 0.09 | 3.5 | 4.3 | 9.7 | 0 |
-| 2021 | Zila parishad (`zp_member`) | 1,158 | 11.2 | 0.18 | 0.24 | 7.6 | 10.0 | 17.8 | 0 |
-| 2021 | Sarpanch (`kachahari_head`) | 8,056 | 6.2 | 0.06 | 0.08 | 3.1 | 4.1 | 8.4 | 1 |
-| 2021 | Panch (`kachahari_member`) | 106,839 | 2.0 | 0.01 | 0.01 | 0.3 | 0.4 | 1.0 | 3 |
+| State | Year | Office | Election | Contests | Mean candidates | Mean namesakes, exact | Mean namesakes, spelling | Contests with a namesake, exact (%) | Contests with a namesake, spelling (%) | Contests with a look-alike (%) | Repeated records dropped |
+|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| Bihar | 2016 | Ward Member (`gp_ward`) | not recorded | 98,088 | 2.8 | 0.02 | 0.02 | 0.9 | 0.9 | 2.2 | 107 |
+| Bihar | 2016 | Panch (`kachahari_member`) | not recorded | 93,019 | 1.5 | 0.00 | 0.00 | 0.1 | 0.2 | 0.4 | 41 |
+| Bihar | 2016 | Panchayat Samiti Member (`block_member`) | not recorded | 10,839 | 7.4 | 0.11 | 0.12 | 5.3 | 5.7 | 13.2 | 75 |
+| Bihar | 2016 | Mukhiya (`gp_head`) | not recorded | 7,995 | 12.0 | 0.34 | 0.37 | 13.8 | 14.5 | 26.4 | 131 |
+| Bihar | 2016 | Sarpanch (`kachahari_head`) | not recorded | 7,915 | 5.7 | 0.07 | 0.07 | 3.4 | 3.6 | 8.4 | 78 |
+| Bihar | 2016 | Zila Parishad Member (`zp_member`) | not recorded | 895 | 11.3 | 0.21 | 0.22 | 9.7 | 10.4 | 19.8 | 16 |
+| Bihar | 2021 | Ward Member (`gp_ward`) | not recorded | 109,583 | 4.6 | 0.04 | 0.06 | 2.1 | 2.7 | 5.7 | 1 |
+| Bihar | 2021 | Panch (`kachahari_member`) | not recorded | 106,839 | 2.0 | 0.01 | 0.01 | 0.3 | 0.4 | 1.0 | 3 |
+| Bihar | 2021 | Panchayat Samiti Member (`block_member`) | not recorded | 11,075 | 6.7 | 0.07 | 0.09 | 3.5 | 4.3 | 9.7 | 0 |
+| Bihar | 2021 | Mukhiya (`gp_head`) | not recorded | 8,062 | 8.2 | 0.13 | 0.18 | 6.2 | 7.9 | 14.0 | 0 |
+| Bihar | 2021 | Sarpanch (`kachahari_head`) | not recorded | 8,056 | 6.2 | 0.06 | 0.08 | 3.1 | 4.1 | 8.4 | 1 |
+| Bihar | 2021 | Zila Parishad Member (`zp_member`) | not recorded | 1,158 | 11.2 | 0.18 | 0.24 | 7.6 | 10.0 | 17.8 | 0 |
+| Rajasthan | 2020 | Sarpanch (`gp_head`) | General Election | 11,300 | 6.0 | 0.12 | 0.13 | 5.5 | 5.8 | 13.0 | 4 |
+| Rajasthan | 2021 | Sarpanch (`gp_head`) | By Election | 79 | 3.0 | 0.00 | 0.00 | 0.0 | 0.0 | 2.5 | 0 |
+| Rajasthan | 2021 | Sarpanch (`gp_head`) | General Election | 10 | 8.8 | 0.00 | 0.00 | 0.0 | 0.0 | 30.0 | 0 |
+| Rajasthan | 2022 | Sarpanch (`gp_head`) | By Election | 56 | 3.3 | 0.11 | 0.11 | 5.4 | 5.4 | 7.1 | 0 |
 
 <!-- summary:end -->
 
-"Mean namesakes" counts every candidate who has a namesake: a contest with two
+Bihar's candidate tables come from its general elections but do not record the
+election type. "Mean namesakes" counts every candidate who has a namesake: a contest with two
 Sunita Devis contributes 2. A contest has a look-alike when any two of its
 candidates are look-alikes. The table is written by `make build` from
 [`data/release/summary.csv`](data/release/summary.csv).
@@ -82,7 +89,9 @@ output is not published.
 
 ## Do look-alikes draw votes?
 
-If voters mix up names, some votes meant for a strong candidate should land on
+Bihar only: Rajasthan records votes for the winner and runner-up alone, so its
+losing candidates cannot be compared. If voters mix up names, some votes meant
+for a strong candidate should land on
 the rival whose name resembles it. [`check_votes.py`](src/candidate_namesakes/check_votes.py)
 compares candidates in the same contest: among those who did not win, how much
 higher is the vote share of those whose name resembles the winner's, at each
@@ -154,14 +163,32 @@ keys (`name_exact`, `name_spelling`), the size of each namesake group and
 
 ## Source
 
-One input, pinned in [`data/source.json`](data/source.json):
-`data/master/candidates_bihar.parquet` from
-[in-rolls/local_elections](https://github.com/in-rolls/local_elections) at commit
-`112e86b7`, SHA-256 `98df872c…6698b`, 1,569,245 candidate rows. That table pools
-the 2016 and 2021 candidate lists in
-[in-rolls/local_elections_bihar](https://github.com/in-rolls/local_elections_bihar)
-(commit `ff9c616`). Earlier Bihar elections (2001, 2006, 2011) are published as
-winners only, so they cannot be counted here.
+Two inputs, pinned with SHA-256 in [`data/source.json`](data/source.json), both
+from [in-rolls/local_elections](https://github.com/in-rolls/local_elections) at
+commit `112e86b7`:
+
+- `data/master/candidates_bihar.parquet`: 1,569,245 candidates, pooled from
+  [in-rolls/local_elections_bihar](https://github.com/in-rolls/local_elections_bihar)
+  (commit `ff9c616`).
+- `data/master/candidates_rajasthan.parquet`: 68,202 candidates, pooled from
+  [in-rolls/local_elections_rajasthan](https://github.com/in-rolls/local_elections_rajasthan).
+
+## Prior work
+
+Namesake and "dummy" candidates in Indian elections are well covered by
+journalism and data journalism, mostly for Lok Sabha and assembly races:
+counts of constituencies where top contestants faced a namesake
+([Hindustan Times, 2019](https://www.pressreader.com/india/hindustan-times-st-jaipur/20190319/281526522388541)),
+the motives and remedies ([The Diplomat, 2020](https://thediplomat.com/2020/12/indias-fight-against-copying-candidates/)),
+whether namesakes swung close races ([Factly](https://factly.in/analysis-do-dummy-candidates-with-similar-names-affect-election-results/)),
+and a fuzzy match of about 350,000 candidates from 1960 to 2023 that finds most
+namesakes take under 1% of the vote ([Diagram Chasing, 2024](https://diagramchasing.fun/2024/votes-in-a-name)).
+No peer-reviewed estimate of how much namesakes take from their target turned
+up, and nothing on panchayat elections. The nearest causal designs are about
+other ballot cues: minor candidates' votes nearly double when listed next to a
+major candidate ([Shue and Luttmer 2009](https://www.hks.harvard.edu/publications/who-misvotes-effect-differential-cognition-costs-election-outcomes-0)),
+and Tamil Nadu independents gain from the symbol they are assigned
+([Lee, PSRM](https://www.cambridge.org/core/journals/political-science-research-and-methods/article/election-symbols-and-vote-choice-evidence-from-india/4AA674319062BDF272A3C0509374C12F)).
 
 ## Limitations
 
@@ -175,6 +202,9 @@ winners only, so they cannot be counted here.
   transliterations, so 2016 similarity is measured on a spelling voters did not
   see. A Latin and a Devanagari spelling of one name are not matched; 64
   contests mix scripts.
+- **Rajasthan names** are Latin transliterations, and many women are listed by
+  given name alone (ANITA, MANJU), so common given names make exact namesakes
+  more likely than full names would.
 - **The 0.7 threshold** rests on 180 rated pairs and one rater. The pair table
   keeps the similarity, so other cut-offs can be applied.
 

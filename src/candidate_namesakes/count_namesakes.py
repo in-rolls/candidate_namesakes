@@ -21,6 +21,7 @@ CONTEST_COLUMNS = [
     "year",
     "tier",
     "tier_local",
+    "election_type",
     "district",
     "block",
     "gp_no",
@@ -44,11 +45,26 @@ def sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def load(path, expected_sha256):
-    found = sha256(path)
-    if found != expected_sha256:
-        raise SystemExit(f"{path}: sha256 {found}, expected {expected_sha256}")
-    candidates = pd.read_parquet(path, columns=CONTEST_COLUMNS + CANDIDATE_COLUMNS)
+def read_inputs(source):
+    """Every pinned input, hash-checked, as one candidate table."""
+    frames = []
+    for item in source["inputs"]:
+        found = sha256(item["path"])
+        if found != item["sha256"]:
+            raise SystemExit(
+                f"{item['path']}: sha256 {found}, expected {item['sha256']}"
+            )
+        frames.append(
+            pd.read_parquet(item["path"], columns=CONTEST_COLUMNS + CANDIDATE_COLUMNS)
+        )
+    candidates = pd.concat(frames, ignore_index=True)
+    for column in ["tier", "reserved_caste", "election_type"]:
+        candidates[column] = candidates[column].astype("string")
+    return candidates
+
+
+def load(source):
+    candidates = read_inputs(source)
     candidates["name_exact"] = candidates.candidate_name.map(exact_key)
     candidates["name_spelling"] = candidates.candidate_name.map(spelling_key)
     # Grouping ignores spaces: राज कुमार and राजकुमार are one name.
@@ -134,8 +150,11 @@ def summarize_contests(candidates):
     return contests.reset_index()
 
 
+POST = ["state", "year", "tier", "tier_local", "election_type"]
+
+
 def summarize_posts(contests):
-    grouped = contests.groupby(["year", "tier"], observed=True)
+    grouped = contests.groupby(POST, observed=True, dropna=False)
     summary = grouped.agg(
         contests=("row_id", "size"),
         candidates=("candidate_count", "sum"),
@@ -153,31 +172,20 @@ def summarize_posts(contests):
     return summary.round(3).reset_index()
 
 
-OFFICES = {
-    "gp_head": "Mukhiya",
-    "gp_ward": "Ward member",
-    "block_member": "Panchayat samiti",
-    "zp_member": "Zila parishad",
-    "kachahari_head": "Sarpanch",
-    "kachahari_member": "Panch",
-}
-
-
 def summary_markdown(summary):
     header = (
-        "| Year | Office | Contests | Mean candidates | Mean namesakes, exact "
-        "| Mean namesakes, spelling | Contests with a namesake, exact (%) "
+        "| State | Year | Office | Election | Contests | Mean candidates "
+        "| Mean namesakes, exact | Mean namesakes, spelling "
+        "| Contests with a namesake, exact (%) "
         "| Contests with a namesake, spelling (%) | Contests with a look-alike (%) "
         "| Repeated records dropped |\n"
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|\n"
+        "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|\n"
     )
-    order = {tier: i for i, tier in enumerate(OFFICES)}
-    rows = summary.sort_values(
-        ["year", "tier"], key=lambda c: c.astype(str).map(order).fillna(c)
-    )
+    rows = summary.sort_values(["state", "year", "contests"], ascending=[1, 1, 0])
     lines = [
-        f"| {r.year} | {OFFICES[r.tier]} (`{r.tier}`) | {r.contests:,} "
-        f"| {r.mean_candidates:.1f} | {r.mean_namesake_exact:.2f} "
+        f"| {r.state} | {r.year} | {r.tier_local.title()} (`{r.tier}`) "
+        f"| {r.election_type if isinstance(r.election_type, str) else 'not recorded'} "
+        f"| {r.contests:,} | {r.mean_candidates:.1f} | {r.mean_namesake_exact:.2f} "
         f"| {r.mean_namesake_spelling:.2f} | {r.contests_with_namesake_exact_pct:.1f} "
         f"| {r.contests_with_namesake_spelling_pct:.1f} "
         f"| {r.contests_with_lookalike_pct:.1f} | {r.duplicate_records:,} |"
@@ -211,7 +219,7 @@ def main():
     args = parser.parse_args()
 
     source = json.loads(Path(args.source).read_text())
-    candidates = flag_namesakes(load(source["path"], source["sha256"]))
+    candidates = flag_namesakes(load(source))
     pairs = build_pairs(candidates)
     candidates = flag_lookalikes(candidates, pairs)
     contests = summarize_contests(candidates)
