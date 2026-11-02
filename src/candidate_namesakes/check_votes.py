@@ -24,6 +24,8 @@ from candidate_namesakes.count_namesakes import load, update_readme
 
 LEVELS = [
     "same name",
+    "alias",
+    "initials differ",
     "contained",
     "similarity 0.8+",
     "similarity 0.6-0.8",
@@ -37,6 +39,10 @@ def level(pair):
         return "unlike"
     if pair.is_same_spelling:
         return "same name"
+    if pair.is_alias_match:
+        return "alias"
+    if pair.is_same_except_initials:
+        return "initials differ"
     if pair.is_contained:
         return "contained"
     similarity = pair.differing_word_similarity
@@ -88,19 +94,25 @@ def resemblance_to(people, pairs, flag):
 
 
 def within_contest_fit(frame, column):
-    """OLS of vote share on resemblance levels, demeaned within contest."""
-    dummies = pd.get_dummies(frame[column])[LEVELS].astype(float)
-    data = pd.concat([frame[["row_id", "vote_share_pct"]], dummies], axis=1)
+    """OLS of vote share on resemblance levels, demeaned within contest.
+
+    Only levels that occur are fitted (Devanagari lists have no initials).
+    """
+    counts = frame[column].value_counts()
+    levels = [name for name in LEVELS if counts.get(name, 0) > 0]
+    dummies = pd.get_dummies(frame[column]).reindex(columns=levels, fill_value=0)
+    data = pd.concat(
+        [frame[["row_id", "vote_share_pct"]], dummies.astype(float)], axis=1
+    )
     demeaned = data.drop(columns="row_id") - data.groupby("row_id").transform("mean")
     groups = pd.factorize(frame.row_id)[0]
-    fit = sm.OLS(demeaned.vote_share_pct, demeaned[LEVELS]).fit(
+    fit = sm.OLS(demeaned.vote_share_pct, demeaned[levels]).fit(
         cov_type="cluster", cov_kwds={"groups": groups}
     )
-    counts = frame[column].value_counts()
     return pd.DataFrame(
         {
-            "level": LEVELS,
-            "candidates": [int(counts.get(name, 0)) for name in LEVELS],
+            "level": levels,
+            "candidates": [int(counts[name]) for name in levels],
             "vote_share_gap_pct": fit.params.values,
             "std_error": fit.bse.values,
         }

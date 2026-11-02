@@ -12,7 +12,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from candidate_namesakes.names import exact_key, spelling_key
+from candidate_namesakes.names import add_name_columns, exact_key
 from candidate_namesakes.pairs import build_pairs
 
 CONTEST_COLUMNS = [
@@ -54,9 +54,11 @@ def read_inputs(source):
             raise SystemExit(
                 f"{item['path']}: sha256 {found}, expected {item['sha256']}"
             )
-        frames.append(
-            pd.read_parquet(item["path"], columns=CONTEST_COLUMNS + CANDIDATE_COLUMNS)
+        frame = pd.read_parquet(
+            item["path"], columns=CONTEST_COLUMNS + CANDIDATE_COLUMNS
         )
+        frame["numbering"] = item["numbering"]
+        frames.append(frame)
     candidates = pd.concat(frames, ignore_index=True)
     for column in ["tier", "reserved_caste", "election_type"]:
         candidates[column] = candidates[column].astype("string")
@@ -65,10 +67,7 @@ def read_inputs(source):
 
 def load(source):
     candidates = read_inputs(source)
-    candidates["name_exact"] = candidates.candidate_name.map(exact_key)
-    candidates["name_spelling"] = candidates.candidate_name.map(spelling_key)
-    # Grouping ignores spaces: राज कुमार and राजकुमार are one name.
-    candidates["name_spelling_compact"] = candidates.name_spelling.str.replace(" ", "")
+    candidates = add_name_columns(candidates, "candidate_name", candidates.numbering)
     relation = candidates.relation_name.map(exact_key)
     # The 2016 release repeats some candidates inside a contest, often with
     # different vote totals. Same name, relation and age is one person; where
@@ -104,6 +103,8 @@ def flag_lookalikes(candidates, pairs):
     """A candidate is a look-alike if any pair with them is close enough."""
     close = pairs[
         pairs.is_same_spelling
+        | pairs.is_alias_match
+        | pairs.is_same_except_initials
         | pairs.is_contained
         | (
             pairs.differing_word_similarity.ge(LOOKALIKE_SIMILARITY)

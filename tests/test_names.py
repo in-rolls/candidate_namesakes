@@ -61,3 +61,11 @@ def test_missing_name():
 def test_spaces_inside_a_name_do_not_split_it():
     joined = spelling_key("राजकुमार सहनी").replace(" ", "")
     assert spelling_key("राज कुमार सहनी").replace(" ", "") == joined
+
+
+def test_nicknames_and_parents_are_not_part_of_the_name():
+    assert exact_key("CHANDU LAL SAHU (CHANDU BHAIYA)") == "CHANDU LAL SAHU"
+    assert exact_key("KULDEEP S/O NARAIN SINGH") == "KULDEEP"
+    assert exact_key("KULDEEP SINGH S/O SHISHPAL") == "KULDEEP SINGH"
+    assert exact_key("SITA W/O RAM") == "SITA"
+    assert exact_key("RAMESH CHANDRA URF RAMESH YADAV") == "RAMESH CHANDRA"

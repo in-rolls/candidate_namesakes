@@ -1,4 +1,4 @@
-.PHONY: fetch build check-votes test lint
+.PHONY: fetch build check-votes tcpd names test lint
 
 COMMIT = 112e86b749257aba5b10106f5727e36019e924f4
 BASE = https://raw.githubusercontent.com/in-rolls/local_elections/$(COMMIT)/data/master
@@ -10,13 +10,24 @@ fetch:
 	for state in $(STATES); do \
 		curl -fL -o $(RAW)/candidates_$$state.parquet $(BASE)/candidates_$$state.parquet; \
 	done
-	shasum -a 256 $(RAW)/*.parquet
+	mkdir -p data/raw/tcpd
+	for et in GE AE; do \
+		curl -fL -o data/raw/tcpd/TCPD_$${et}_All_States_2026-7-26.csv.gz \
+			https://raw.githubusercontent.com/Ayush12358/electoral-reservation/8e9a5c6dadcc6bf84abcf74d83e0bb24b90981af/data/TCPD_$${et}_All_States_2026-7-26.csv.gz; \
+	done
+	shasum -a 256 $(RAW)/*.parquet data/raw/tcpd/*.csv.gz
 
 build:
 	uv run python -m candidate_namesakes.count_namesakes
 
 check-votes:
 	uv run python -m candidate_namesakes.check_votes
+
+tcpd:
+	uv run python -m candidate_namesakes.tcpd
+
+names:
+	uv run python -m candidate_namesakes.inventory_names
 
 test:
 	uv run pytest -q

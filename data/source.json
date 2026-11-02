@@ -7,14 +7,40 @@
       "path": "data/raw/local_elections/candidates_bihar.parquet",
       "source_path": "data/master/candidates_bihar.parquet",
       "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
-      "rows": 1569245
+      "rows": 1569245,
+      "numbering": true
     },
     {
       "state": "Rajasthan",
       "path": "data/raw/local_elections/candidates_rajasthan.parquet",
       "source_path": "data/master/candidates_rajasthan.parquet",
       "sha256": "fd7e51d9944b4bd0508f4a14a0d51140151a6c16a7a12351b015ad1eeeb6c098",
-      "rows": 68202
+      "rows": 68202,
+      "numbering": true
+    }
+  ],
+  "tcpd": [
+    {
+      "election": "lok_sabha",
+      "path": "data/raw/tcpd/TCPD_GE_All_States_2026-7-26.csv.gz",
+      "dataset": "TCPD Indian Elections Data v2.0 (Lok Dhaba)",
+      "official_url": "https://lokdhaba.ashoka.edu.in/downloads/All_States/All_States_GE.csv.gz",
+      "retrieved_from": "https://raw.githubusercontent.com/Ayush12358/electoral-reservation/8e9a5c6dadcc6bf84abcf74d83e0bb24b90981af/data/TCPD_GE_All_States_2026-7-26.csv.gz",
+      "downloaded_from_tcpd": "2026-07-26 (date in the mirror's file name)",
+      "retrieved_at": "2026-11-02T00:04:18Z",
+      "sha256": "0cd0c701d9a229b6c638e90db49be40463dc532957433e770942942087e2039d",
+      "rows": 91669
+    },
+    {
+      "election": "assembly",
+      "path": "data/raw/tcpd/TCPD_AE_All_States_2026-7-26.csv.gz",
+      "dataset": "TCPD Indian Elections Data v2.0 (Lok Dhaba)",
+      "official_url": "https://lokdhaba.ashoka.edu.in/downloads/All_States/All_States_AE.csv.gz",
+      "retrieved_from": "https://raw.githubusercontent.com/Ayush12358/electoral-reservation/8e9a5c6dadcc6bf84abcf74d83e0bb24b90981af/data/TCPD_AE_All_States_2026-7-26.csv.gz",
+      "downloaded_from_tcpd": "2026-07-26 (date in the mirror's file name)",
+      "retrieved_at": "2026-11-02T00:04:18Z",
+      "sha256": "6159e090d7d0d0e15531ff76b8429457121d7611b7752864d5123a8d75e01fc7",
+      "rows": 483565
     }
   ]
 }

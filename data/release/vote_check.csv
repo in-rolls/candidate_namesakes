@@ -1,71 +1,81 @@
 office,resembles,level,candidates,vote_share_gap_pct,std_error,baseline_mean_share_pct
-all offices,winner,same name,2578,-0.057,0.179,14.826
-all offices,winner,contained,375,-0.421,0.509,14.826
-all offices,winner,similarity 0.8+,1005,0.279,0.311,14.826
-all offices,winner,similarity 0.6-0.8,9331,-0.053,0.101,14.826
-all offices,winner,similarity 0.5-0.6,17169,-0.197,0.075,14.826
-all offices,last-placed (placebo),same name,1918,0.018,0.188,16.01
-all offices,last-placed (placebo),contained,280,-0.29,0.555,16.01
-all offices,last-placed (placebo),similarity 0.8+,782,-0.538,0.27,16.01
-all offices,last-placed (placebo),similarity 0.6-0.8,7425,-0.297,0.095,16.01
-all offices,last-placed (placebo),similarity 0.5-0.6,13728,-0.218,0.07,16.01
-block_member,winner,same name,304,0.178,0.394,11.464
-block_member,winner,contained,41,0.274,1.354,11.464
-block_member,winner,similarity 0.8+,126,-0.439,0.613,11.464
-block_member,winner,similarity 0.6-0.8,1106,0.231,0.206,11.464
-block_member,winner,similarity 0.5-0.6,2106,-0.294,0.153,11.464
-block_member,last-placed (placebo),same name,237,0.537,0.389,12.494
-block_member,last-placed (placebo),contained,41,-0.906,0.981,12.494
-block_member,last-placed (placebo),similarity 0.8+,134,-0.757,0.532,12.494
-block_member,last-placed (placebo),similarity 0.6-0.8,1069,-0.081,0.186,12.494
-block_member,last-placed (placebo),similarity 0.5-0.6,1977,-0.14,0.141,12.494
-gp_head,winner,same name,381,-0.865,0.371,7.436
-gp_head,winner,contained,56,-1.245,1.234,7.436
-gp_head,winner,similarity 0.8+,123,1.196,0.902,7.436
-gp_head,winner,similarity 0.6-0.8,1185,-0.066,0.23,7.436
-gp_head,winner,similarity 0.5-0.6,2212,0.051,0.172,7.436
-gp_head,last-placed (placebo),same name,320,-0.135,0.47,8.142
-gp_head,last-placed (placebo),contained,39,1.883,1.833,8.142
-gp_head,last-placed (placebo),similarity 0.8+,117,-1.421,0.613,8.142
-gp_head,last-placed (placebo),similarity 0.6-0.8,1248,-0.48,0.213,8.142
-gp_head,last-placed (placebo),similarity 0.5-0.6,2163,-0.102,0.163,8.142
-gp_ward,winner,same name,1429,-0.051,0.271,16.913
-gp_ward,winner,contained,199,-0.547,0.767,16.913
-gp_ward,winner,similarity 0.8+,593,0.159,0.434,16.913
-gp_ward,winner,similarity 0.6-0.8,5501,-0.104,0.147,16.913
-gp_ward,winner,similarity 0.5-0.6,9883,-0.261,0.111,16.913
-gp_ward,last-placed (placebo),same name,1075,-0.184,0.265,19.059
-gp_ward,last-placed (placebo),contained,152,-1.264,0.775,19.059
-gp_ward,last-placed (placebo),similarity 0.8+,419,-0.296,0.399,19.059
-gp_ward,last-placed (placebo),similarity 0.6-0.8,3972,-0.274,0.148,19.059
-gp_ward,last-placed (placebo),similarity 0.5-0.6,7389,-0.319,0.108,19.059
-kachahari_head,winner,same name,216,0.367,0.546,13.355
-kachahari_head,winner,contained,36,0.363,1.333,13.355
-kachahari_head,winner,similarity 0.8+,65,1.812,0.912,13.355
-kachahari_head,winner,similarity 0.6-0.8,623,0.202,0.303,13.355
-kachahari_head,winner,similarity 0.5-0.6,1327,-0.293,0.201,13.355
-kachahari_head,last-placed (placebo),same name,140,0.268,0.596,14.509
-kachahari_head,last-placed (placebo),contained,24,0.27,1.192,14.509
-kachahari_head,last-placed (placebo),similarity 0.8+,56,0.058,0.895,14.509
-kachahari_head,last-placed (placebo),similarity 0.6-0.8,547,-0.338,0.257,14.509
-kachahari_head,last-placed (placebo),similarity 0.5-0.6,1101,-0.028,0.191,14.509
-kachahari_member,winner,same name,206,1.151,0.79,24.411
-kachahari_member,winner,contained,31,0.342,2.085,24.411
-kachahari_member,winner,similarity 0.8+,80,-0.642,1.456,24.411
-kachahari_member,winner,similarity 0.6-0.8,809,-0.545,0.463,24.411
-kachahari_member,winner,similarity 0.5-0.6,1446,0.015,0.343,24.411
-kachahari_member,last-placed (placebo),same name,109,1.238,1.25,28.64
-kachahari_member,last-placed (placebo),contained,15,-0.431,2.941,28.64
-kachahari_member,last-placed (placebo),similarity 0.8+,49,-0.854,2.076,28.64
-kachahari_member,last-placed (placebo),similarity 0.6-0.8,465,-0.667,0.763,28.64
-kachahari_member,last-placed (placebo),similarity 0.5-0.6,833,-0.285,0.495,28.64
-zp_member,winner,same name,42,-0.051,0.772,7.375
-zp_member,winner,contained,12,-0.651,1.392,7.375
-zp_member,winner,similarity 0.8+,18,-0.482,1.364,7.375
-zp_member,winner,similarity 0.6-0.8,107,0.352,0.548,7.375
-zp_member,winner,similarity 0.5-0.6,195,0.131,0.476,7.375
-zp_member,last-placed (placebo),same name,37,0.66,0.658,7.818
-zp_member,last-placed (placebo),contained,9,2.963,1.959,7.818
-zp_member,last-placed (placebo),similarity 0.8+,7,4.558,2.44,7.818
-zp_member,last-placed (placebo),similarity 0.6-0.8,124,-0.226,0.427,7.818
-zp_member,last-placed (placebo),similarity 0.5-0.6,265,-0.417,0.28,7.818
+all offices,winner,same name,2591,-0.075,0.179,14.825
+all offices,winner,alias,5,-2.378,3.287,14.825
+all offices,winner,contained,867,-0.61,0.373,14.825
+all offices,winner,similarity 0.8+,1009,0.304,0.311,14.825
+all offices,winner,similarity 0.6-0.8,9361,-0.059,0.101,14.825
+all offices,winner,similarity 0.5-0.6,17213,-0.21,0.075,14.825
+all offices,last-placed (placebo),same name,1929,-0.014,0.188,16.009
+all offices,last-placed (placebo),alias,3,-5.684,4.562,16.009
+all offices,last-placed (placebo),initials differ,1,11.022,0.0,16.009
+all offices,last-placed (placebo),contained,711,0.058,0.383,16.009
+all offices,last-placed (placebo),similarity 0.8+,786,-0.511,0.271,16.009
+all offices,last-placed (placebo),similarity 0.6-0.8,7449,-0.287,0.095,16.009
+all offices,last-placed (placebo),similarity 0.5-0.6,13764,-0.221,0.07,16.009
+block_member,winner,same name,304,0.179,0.394,11.465
+block_member,winner,contained,82,-0.874,0.918,11.465
+block_member,winner,similarity 0.8+,126,-0.437,0.613,11.465
+block_member,winner,similarity 0.6-0.8,1106,0.24,0.206,11.465
+block_member,winner,similarity 0.5-0.6,2108,-0.272,0.153,11.465
+block_member,last-placed (placebo),same name,237,0.536,0.389,12.494
+block_member,last-placed (placebo),alias,1,3.206,0.0,12.494
+block_member,last-placed (placebo),initials differ,1,11.022,0.0,12.494
+block_member,last-placed (placebo),contained,103,-0.495,0.74,12.494
+block_member,last-placed (placebo),similarity 0.8+,135,-0.784,0.528,12.494
+block_member,last-placed (placebo),similarity 0.6-0.8,1071,-0.064,0.186,12.494
+block_member,last-placed (placebo),similarity 0.5-0.6,1976,-0.158,0.14,12.494
+gp_head,winner,same name,382,-0.856,0.37,7.436
+gp_head,winner,alias,1,-4.46,0.0,7.436
+gp_head,winner,contained,104,-0.822,0.987,7.436
+gp_head,winner,similarity 0.8+,125,1.356,0.905,7.436
+gp_head,winner,similarity 0.6-0.8,1187,-0.079,0.23,7.436
+gp_head,winner,similarity 0.5-0.6,2221,0.058,0.171,7.436
+gp_head,last-placed (placebo),same name,321,-0.149,0.469,8.142
+gp_head,last-placed (placebo),contained,87,0.798,1.169,8.142
+gp_head,last-placed (placebo),similarity 0.8+,117,-1.42,0.612,8.142
+gp_head,last-placed (placebo),similarity 0.6-0.8,1250,-0.465,0.213,8.142
+gp_head,last-placed (placebo),similarity 0.5-0.6,2167,-0.089,0.164,8.142
+gp_ward,winner,same name,1436,-0.066,0.271,16.914
+gp_ward,winner,alias,2,5.639,2.461,16.914
+gp_ward,winner,contained,527,-0.734,0.54,16.914
+gp_ward,winner,similarity 0.8+,595,0.158,0.433,16.914
+gp_ward,winner,similarity 0.6-0.8,5523,-0.111,0.147,16.914
+gp_ward,winner,similarity 0.5-0.6,9904,-0.291,0.111,16.914
+gp_ward,last-placed (placebo),same name,1082,-0.244,0.266,19.059
+gp_ward,last-placed (placebo),alias,2,-9.573,4.85,19.059
+gp_ward,last-placed (placebo),contained,410,-0.12,0.53,19.059
+gp_ward,last-placed (placebo),similarity 0.8+,423,-0.242,0.401,19.059
+gp_ward,last-placed (placebo),similarity 0.6-0.8,3989,-0.277,0.147,19.059
+gp_ward,last-placed (placebo),similarity 0.5-0.6,7408,-0.332,0.108,19.059
+kachahari_head,winner,same name,219,0.355,0.541,13.355
+kachahari_head,winner,contained,53,0.019,1.068,13.355
+kachahari_head,winner,similarity 0.8+,64,1.796,0.926,13.355
+kachahari_head,winner,similarity 0.6-0.8,627,0.174,0.302,13.355
+kachahari_head,winner,similarity 0.5-0.6,1330,-0.322,0.201,13.355
+kachahari_head,last-placed (placebo),same name,141,0.254,0.592,14.508
+kachahari_head,last-placed (placebo),contained,50,0.521,1.027,14.508
+kachahari_head,last-placed (placebo),similarity 0.8+,56,0.062,0.895,14.508
+kachahari_head,last-placed (placebo),similarity 0.6-0.8,546,-0.297,0.257,14.508
+kachahari_head,last-placed (placebo),similarity 0.5-0.6,1111,-0.003,0.19,14.508
+kachahari_member,winner,same name,207,0.988,0.802,24.411
+kachahari_member,winner,alias,1,-5.814,0.0,24.411
+kachahari_member,winner,contained,84,0.065,1.359,24.411
+kachahari_member,winner,similarity 0.8+,81,-0.596,1.44,24.411
+kachahari_member,winner,similarity 0.6-0.8,811,-0.547,0.46,24.411
+kachahari_member,winner,similarity 0.5-0.6,1454,0.024,0.342,24.411
+kachahari_member,last-placed (placebo),same name,110,1.104,1.232,28.641
+kachahari_member,last-placed (placebo),contained,45,-1.257,1.761,28.641
+kachahari_member,last-placed (placebo),similarity 0.8+,48,-0.636,2.16,28.641
+kachahari_member,last-placed (placebo),similarity 0.6-0.8,467,-0.614,0.759,28.641
+kachahari_member,last-placed (placebo),similarity 0.5-0.6,833,-0.249,0.494,28.641
+zp_member,winner,same name,43,-0.149,0.76,7.374
+zp_member,winner,alias,1,-11.625,0.0,7.374
+zp_member,winner,contained,17,0.666,1.064,7.374
+zp_member,winner,similarity 0.8+,18,-0.482,1.364,7.374
+zp_member,winner,similarity 0.6-0.8,107,0.353,0.548,7.374
+zp_member,winner,similarity 0.5-0.6,196,0.14,0.474,7.374
+zp_member,last-placed (placebo),same name,38,0.844,0.663,7.818
+zp_member,last-placed (placebo),contained,16,1.115,1.453,7.818
+zp_member,last-placed (placebo),similarity 0.8+,7,4.562,2.44,7.818
+zp_member,last-placed (placebo),similarity 0.6-0.8,126,-0.158,0.427,7.818
+zp_member,last-placed (placebo),similarity 0.5-0.6,269,-0.393,0.279,7.818

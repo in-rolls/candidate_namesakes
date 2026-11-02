@@ -8,14 +8,40 @@
         "path": "data/raw/local_elections/candidates_bihar.parquet",
         "source_path": "data/master/candidates_bihar.parquet",
         "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
-        "rows": 1569245
+        "rows": 1569245,
+        "numbering": true
       },
       {
         "state": "Rajasthan",
         "path": "data/raw/local_elections/candidates_rajasthan.parquet",
         "source_path": "data/master/candidates_rajasthan.parquet",
         "sha256": "fd7e51d9944b4bd0508f4a14a0d51140151a6c16a7a12351b015ad1eeeb6c098",
-        "rows": 68202
+        "rows": 68202,
+        "numbering": true
+      }
+    ],
+    "tcpd": [
+      {
+        "election": "lok_sabha",
+        "path": "data/raw/tcpd/TCPD_GE_All_States_2026-7-26.csv.gz",
+        "dataset": "TCPD Indian Elections Data v2.0 (Lok Dhaba)",
+        "official_url": "https://lokdhaba.ashoka.edu.in/downloads/All_States/All_States_GE.csv.gz",
+        "retrieved_from": "https://raw.githubusercontent.com/Ayush12358/electoral-reservation/8e9a5c6dadcc6bf84abcf74d83e0bb24b90981af/data/TCPD_GE_All_States_2026-7-26.csv.gz",
+        "downloaded_from_tcpd": "2026-07-26 (date in the mirror's file name)",
+        "retrieved_at": "2026-11-02T00:04:18Z",
+        "sha256": "0cd0c701d9a229b6c638e90db49be40463dc532957433e770942942087e2039d",
+        "rows": 91669
+      },
+      {
+        "election": "assembly",
+        "path": "data/raw/tcpd/TCPD_AE_All_States_2026-7-26.csv.gz",
+        "dataset": "TCPD Indian Elections Data v2.0 (Lok Dhaba)",
+        "official_url": "https://lokdhaba.ashoka.edu.in/downloads/All_States/All_States_AE.csv.gz",
+        "retrieved_from": "https://raw.githubusercontent.com/Ayush12358/electoral-reservation/8e9a5c6dadcc6bf84abcf74d83e0bb24b90981af/data/TCPD_AE_All_States_2026-7-26.csv.gz",
+        "downloaded_from_tcpd": "2026-07-26 (date in the mirror's file name)",
+        "retrieved_at": "2026-11-02T00:04:18Z",
+        "sha256": "6159e090d7d0d0e15531ff76b8429457121d7611b7752864d5123a8d75e01fc7",
+        "rows": 483565
       }
     ]
   },
@@ -23,22 +49,22 @@
     {
       "path": "data/release/contests.parquet",
       "rows": 474969,
-      "sha256": "aae6eac35c537cc79def5f56e57c1be50d8d904f088161e63f3e453ed4b1a993"
+      "sha256": "b09f04ab55f18620752350c0332cf812e364e595d65c002893fe2174e277172e"
     },
     {
       "path": "data/release/namesake_candidates.parquet",
-      "rows": 42932,
-      "sha256": "2886cb0c48985e3ef966ee3f9644253fce212bb305c0b4d0c2bc2e0843990182"
+      "rows": 45442,
+      "sha256": "f686b14580946a8a8ac26e38bd4d22147e47f328c8f541ee07d24fbcc0b5fabe"
     },
     {
       "path": "data/release/name_pairs.parquet",
-      "rows": 137914,
-      "sha256": "458e3009e6a5985e306b4ec19fa0eed118fc1c45d7bc37d50d0c5a32d4096806"
+      "rows": 140111,
+      "sha256": "aea4af1f7553a22fe50462e6b37409ac57c0d01aaaee1a279e7527ccf4743776"
     },
     {
       "path": "data/release/summary.csv",
       "rows": 16,
-      "sha256": "20e0eec9a36a4bd5f01c558e688a47d05053cce0f46c742a7d9d44e18f3d9d60"
+      "sha256": "e39c67ce9900c8cc0cb388b2d7e4ea94df2c7d64795975b4ac244ea91ed907c7"
     }
   ]
 }

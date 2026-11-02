@@ -6,6 +6,12 @@ any signal says the names resemble each other:
 - ``is_same_exact``: the same name once case, punctuation and SEC numbering go.
 - ``is_same_spelling``: the same once spelling variants are folded and spaces
   are ignored (राज कुमार = राजकुमार).
+  Word order is ignored too (N. SUBRAMANIAN = SUBRAMANIAN N.).
+- ``is_alias_match``: one name, or one of its printed aliases, is an alias of
+  the other (MANOJ KUMAR URF MANOJ SAH beside MANOJ SAH).
+- ``is_same_except_initials``: the same once one-letter words are dropped
+  (K. MOORTHY, A. K. MOORTHY, S. MOORTHY). Where names carry the father's or
+  village initial, this is the usual form a namesake takes.
 - ``is_contained``: every word of one name is in the other (MADAN RAY, MADAN
   KISHOR RAY).
 - ``differing_word_similarity``: 1 minus the normalized edit distance between
@@ -48,24 +54,44 @@ def differing_word_similarity(a, b):
 
 
 def shares_a_word(a, b):
+    """A shared word other than an initial, or both names one word."""
     words_a, words_b = a.split(), b.split()
     if len(words_a) == 1 and len(words_b) == 1:
         return True
-    return bool(set(words_a) & set(words_b))
+    return bool({w for w in words_a if len(w) > 1} & {w for w in words_b if len(w) > 1})
+
+
+def without_initials(key):
+    return Counter(word for word in key.split() if len(word) > 1)
 
 
 def score(a, b):
-    """(same spelling, contained, differing-word similarity, shares a word)."""
-    if compact(a) == compact(b):
-        return True, False, 1.0, True
+    """(same spelling, same except initials, contained, similarity, shares a word)."""
+    if compact(a) == compact(b) or Counter(a.split()) == Counter(b.split()):
+        return True, False, False, 1.0, True
+    full_a, full_b = without_initials(a), without_initials(b)
+    initials = bool(full_a) and full_a == full_b
     only_a, only_b = differing_words(a, b)
     contained = not only_a or not only_b
-    return False, contained, differing_word_similarity(a, b), shares_a_word(a, b)
+    similarity = differing_word_similarity(a, b)
+    return False, initials, contained, similarity, shares_a_word(a, b)
 
 
-def is_kept(same_spelling, contained, similarity):
+def alias_match(one, two):
+    """Either name, or any alias of it, is an alias of the other."""
+    keys_one = {compact(k) for k in (one.name_alias_keys or ()) if k}
+    keys_two = {compact(k) for k in (two.name_alias_keys or ()) if k}
+    if not keys_one and not keys_two:
+        return False
+    names_one = keys_one | {compact(one.name_spelling)}
+    names_two = keys_two | {compact(two.name_spelling)}
+    return bool(names_one & names_two)
+
+
+def is_kept(same_spelling, initials, contained, similarity):
     return (
         same_spelling
+        or initials
         or contained
         or (similarity is not None and similarity >= KEEP_SIMILARITY)
     )
@@ -77,6 +103,7 @@ def build_pairs(candidates):
         ~candidates.is_duplicate_record & candidates.name_spelling.notna()
     ]
     columns = ["candidate_id", "candidate_name", "name_exact", "name_spelling"]
+    columns += ["name_alias_keys"]
     scores = {}
     rows = []
     for row_id, group in people.groupby("row_id", sort=False):
@@ -85,8 +112,9 @@ def build_pairs(candidates):
             key = tuple(sorted((one.name_spelling, two.name_spelling)))
             if key not in scores:
                 scores[key] = score(*key)
-            same_spelling, contained, similarity, shared = scores[key]
-            if not is_kept(same_spelling, contained, similarity):
+            same_spelling, initials, contained, similarity, shared = scores[key]
+            alias = not same_spelling and alias_match(one, two)
+            if not (alias or is_kept(same_spelling, initials, contained, similarity)):
                 continue
             rows.append(
                 (
@@ -99,6 +127,8 @@ def build_pairs(candidates):
                     two.name_spelling,
                     one.name_exact == two.name_exact,
                     same_spelling,
+                    alias,
+                    initials,
                     contained,
                     similarity,
                     shared,
@@ -116,6 +146,8 @@ def build_pairs(candidates):
             "name_spelling_b",
             "is_same_exact",
             "is_same_spelling",
+            "is_alias_match",
+            "is_same_except_initials",
             "is_contained",
             "differing_word_similarity",
             "shares_a_word",
