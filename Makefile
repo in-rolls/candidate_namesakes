@@ -1,4 +1,4 @@
-.PHONY: fetch build check-votes tcpd names test lint
+.PHONY: fetch build check-votes tcpd figures names test lint
 
 COMMIT = 112e86b749257aba5b10106f5727e36019e924f4
 BASE = https://raw.githubusercontent.com/in-rolls/local_elections/$(COMMIT)/data/master
@@ -25,6 +25,9 @@ check-votes:
 
 tcpd:
 	uv run python -m candidate_namesakes.tcpd
+
+figures:
+	uv run python -m candidate_namesakes.figures
 
 names:
 	uv run python -m candidate_namesakes.inventory_names

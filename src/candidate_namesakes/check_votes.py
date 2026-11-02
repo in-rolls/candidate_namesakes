@@ -121,20 +121,26 @@ def within_contest_fit(frame, column):
 
 def vote_markdown(result, people):
     pooled = result[result.office == "all offices"]
-    lines = [
+    table = pd.DataFrame(
+        {
+            "Resembles": pooled.resembles,
+            "Resemblance": pooled.level,
+            "Candidates": pooled.candidates,
+            "Vote-share gap (points)": pooled.vote_share_gap_pct,
+            "Standard error": pooled.std_error,
+        }
+    )
+    note = (
         f"{people.row_id.nunique():,} contests with every vote count recorded and "
-        "one clear winner and last-placed candidate.",
-        "",
-        "| Resembles | Resemblance | Candidates | Vote-share gap (points) "
-        "| Standard error |",
-        "|---|---|---:|---:|---:|",
-    ]
-    lines += [
-        f"| {r.resembles} | {r.level} | {r.candidates:,} "
-        f"| {r.vote_share_gap_pct:+.2f} | {r.std_error:.2f} |"
-        for r in pooled.itertuples()
-    ]
-    return "\n".join(lines)
+        "one clear winner and last-placed candidate."
+    )
+    return (
+        note
+        + "\n\n"
+        + table.to_markdown(
+            index=False, floatfmt=("", "", "", "+.2f", ".2f"), intfmt=","
+        )
+    )
 
 
 def main():

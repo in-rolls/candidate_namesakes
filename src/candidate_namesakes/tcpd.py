@@ -52,6 +52,73 @@ def is_abbreviated(name):
     )
 
 
+STATE_CODES = {
+    "HR": "Haryana", "JH": "Jharkhand", "JK": "Jammu_&_Kashmir", "MH": "Maharashtra",
+    "BR": "Bihar", "DL": "Delhi", "AS": "Assam", "KL": "Kerala", "PY": "Puducherry",
+    "TN": "Tamil_Nadu", "WB": "West_Bengal", "AP": "Andhra_Pradesh",
+    "AR": "Arunachal_Pradesh", "OD": "Odisha", "SK": "Sikkim",
+}  # fmt: skip
+
+
+def tcpd_state(name):
+    return str(name).strip().replace(" and ", " & ").replace(" ", "_")
+
+
+def read_eci_report(path):
+    """ECI statistical report 33, Constituency Wise Detailed Result (2024 GE)."""
+    report = pd.read_csv(path)
+    report = report[report["Candidate Name"].notna()]
+    return pd.DataFrame(
+        {
+            "State_Name": report["State Name"].map(tcpd_state),
+            "Constituency_No": report["PC Name"].str.strip(),
+            "Constituency_Name": report["PC Name"].str.strip(),
+            "Candidate": report["Candidate Name"],
+            "Party": report["Party Name"],
+            "Votes": pd.to_numeric(report["Total"], errors="coerce"),
+        }
+    )
+
+
+def read_india_votes_data(path):
+    """thecont1/india-votes-data per-election CSV, scraped from results.eci.gov.in."""
+    table = pd.read_csv(path)
+    party = table.party.where(table.party.ne("Independent"), "IND")
+    return pd.DataFrame(
+        {
+            "State_Name": table.election_state.map(STATE_CODES),
+            "Constituency_No": table.constituency_no,
+            "Constituency_Name": table.constituency,
+            "Candidate": table.candidate,
+            "Party": party.where(~table.candidate.str.upper().eq("NOTA"), "NOTA"),
+            "Votes": table.evm_votes + table.postal_votes,
+        }
+    )
+
+
+def read_recent(item):
+    """A post-TCPD election, reshaped to the TCPD columns this module uses."""
+    reader = (
+        read_eci_report if item["format"] == "eci_report" else read_india_votes_data
+    )
+    frame = reader(item["path"])
+    nota = frame.Party.eq("NOTA") | frame.Candidate.str.upper().isin(
+        ["NOTA", "NONE OF THE ABOVE"]
+    )
+    frame.loc[nota, "Party"] = "NOTA"
+    keys = ["State_Name", "Constituency_No"]
+    frame["Valid_Votes"] = frame.groupby(keys).Votes.transform("sum")
+    frame = frame[~nota].copy()
+    frame["Position"] = (
+        frame.groupby(keys)
+        .Votes.rank(ascending=False, method="first", na_option="bottom")
+        .astype(int)
+    )
+    frame["Year"], frame["month"] = item["year"], item["month"]
+    frame["Assembly_No"], frame["Poll_No"] = pd.NA, 0
+    return frame
+
+
 def read_tcpd(source):
     frames = []
     for item in source["tcpd"]:
@@ -61,6 +128,15 @@ def read_tcpd(source):
                 f"{item['path']}: sha256 {found}, expected {item['sha256']}"
             )
         frame = pd.read_csv(item["path"], low_memory=False)
+        frame["election"] = item["election"]
+        frames.append(frame)
+    for item in source.get("recent", []):
+        found = sha256(item["path"])
+        if found != item["sha256"]:
+            raise SystemExit(
+                f"{item['path']}: sha256 {found}, expected {item['sha256']}"
+            )
+        frame = read_recent(item)
         frame["election"] = item["election"]
         frames.append(frame)
     tcpd = pd.concat(frames, ignore_index=True)
@@ -222,47 +298,28 @@ def extent(contests):
     return pd.DataFrame(out).round(2)
 
 
-def extent_markdown(table, rates):
-    lines = [
-        "| Election | Year | Contests | Exact (%) | Same spelling (%) "
-        "| Alias (%) | Initials differ (%) | Look-alike (%) "
-        "| Look-alikes who are independents (%) "
-        "| Runner-up's look-alikes outpolled the margin |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|---:|",
-    ]
-    big = table[table.contests >= 100]
-    for r in big.sort_values(["election", "year"]).itertuples():
-        lines.append(
-            f"| {r.election.replace('_', ' ').title()} | {r.year} | {r.contests:,} "
-            f"| {r.with_exact_pct:.1f} | {r.with_spelling_pct:.1f} "
-            f"| {r.with_alias_pct:.1f} | {r.with_initials_pct:.1f} "
-            f"| {r.with_lookalike_pct:.1f} | {r.lookalike_independent_pct:.0f} "
-            f"| {r.pivotal_lookalike:,} |"
-        )
+def rates_markdown(rates):
+    """Leader-minor vs minor-minor namesake rates, one row per election and level."""
     wide = rates.pivot_table(
         index=["election", "level"], columns="pair", values="per_10000"
     ).reset_index()
-    lines += [
-        "",
-        "| Election | Match level | Leader-minor pairs (per 10,000) "
-        "| Minor-minor pairs (per 10,000) | Ratio |",
-        "|---|---|---:|---:|---:|",
-    ]
-    order = {name: i for i, name in enumerate(LEVELS)}
-    wide = wide.sort_values(["election", "level"], key=lambda c: c.map(order).fillna(c))
-    for r in wide.to_dict("records"):
-        lead, minor = r["leader-minor"], r["minor-minor"]
-        lines.append(
-            f"| {r['election'].replace('_', ' ').title()} | {r['level']} | {lead:.1f} "
-            f"| {minor:.1f} | {lead / minor:.2f} |"
-        )
-    return "\n".join(lines)
+    wide["order"] = wide.level.map({name: i for i, name in enumerate(LEVELS)})
+    wide = wide.sort_values(["election", "order"])
+    table = pd.DataFrame(
+        {
+            "Election": wide.election.str.replace("_", " ").str.title(),
+            "Match level": wide.level,
+            "Leader-minor pairs (per 10,000)": wide["leader-minor"],
+            "Minor-minor pairs (per 10,000)": wide["minor-minor"],
+            "Ratio": wide["leader-minor"] / wide["minor-minor"],
+        }
+    )
+    return table.to_markdown(index=False, floatfmt=("", "", ".1f", ".1f", ".2f"))
 
 
 def write_readme():
-    table = pd.read_csv(RELEASE / "extent.csv")
     rates = pd.read_csv(RELEASE / "pair_rates.csv")
-    update_readme(extent_markdown(table, rates), marker="tcpd")
+    update_readme(rates_markdown(rates), marker="tcpd")
 
 
 def main():

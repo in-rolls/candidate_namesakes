@@ -48,21 +48,26 @@ def differing_word_similarity(a, b):
     only_a, only_b = differing_words(a, b)
     if not only_a or not only_b:
         return None
-    text_a = " ".join(sorted(only_a.elements()))
-    text_b = " ".join(sorted(only_b.elements()))
-    return Levenshtein.normalized_similarity(text_a, text_b)
+    # Initials are compared by the initials rule, not by edit distance.
+    full_a = sorted(w for w in only_a.elements() if len(w) > 1)
+    full_b = sorted(w for w in only_b.elements() if len(w) > 1)
+    if not full_a or not full_b:
+        return None
+    return Levenshtein.normalized_similarity(" ".join(full_a), " ".join(full_b))
 
 
 def shares_a_word(a, b):
-    """A shared word other than an initial, or both names one word."""
-    words_a, words_b = a.split(), b.split()
-    if len(words_a) == 1 and len(words_b) == 1:
+    """A shared word other than an initial, or each name has one full word."""
+    full_a = {w for w in a.split() if len(w) > 1}
+    full_b = {w for w in b.split() if len(w) > 1}
+    if len(full_a) <= 1 and len(full_b) <= 1:
         return True
-    return bool({w for w in words_a if len(w) > 1} & {w for w in words_b if len(w) > 1})
+    return bool(full_a & full_b)
 
 
 def without_initials(key):
-    return Counter(word for word in key.split() if len(word) > 1)
+    """The full words, joined without spaces (PANNIR SELVAM = PANNIRSELVAM)."""
+    return "".join(sorted(word for word in key.split() if len(word) > 1))
 
 
 def score(a, b):

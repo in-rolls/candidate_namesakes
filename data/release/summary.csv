@@ -1,7 +1,7 @@
 state,year,tier,tier_local,election_type,contests,candidates,mean_candidates,mean_namesake_exact,mean_namesake_spelling,contests_with_namesake_exact_pct,contests_with_namesake_spelling_pct,contests_with_lookalike_pct,duplicate_records
 Bihar,2016,block_member,panchayat samiti member,,10839,80180,7.397,0.113,0.122,5.314,5.683,13.378,75
 Bihar,2016,gp_head,mukhiya,,7995,96109,12.021,0.346,0.367,13.834,14.559,26.842,131
-Bihar,2016,gp_ward,ward member,,98088,276663,2.821,0.017,0.019,0.856,0.919,2.313,107
+Bihar,2016,gp_ward,ward member,,98088,276663,2.821,0.017,0.019,0.856,0.919,2.314,107
 Bihar,2016,kachahari_head,sarpanch,,7915,44971,5.682,0.07,0.075,3.399,3.626,8.629,78
 Bihar,2016,kachahari_member,panch,,93019,128385,1.38,0.003,0.003,0.146,0.155,0.429,41
 Bihar,2016,zp_member,zila parishad member,,895,10109,11.295,0.219,0.235,9.944,10.726,20.112,16

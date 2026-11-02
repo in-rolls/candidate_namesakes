@@ -49,17 +49,17 @@ Share of distinct printed names from which each kind was taken out, written by
 
 <!-- inventory:start -->
 
-| Material | Bihar | Rajasthan | TCPD lok sabha | TCPD assembly |
-|---|---:|---:|---:|---:|
-| Distinct printed names | 407,718 | 31,409 | 72,788 | 321,291 |
-| Title (DR, SHRI, SMT, KUMARI, श्रीमती, TMT) | 0.69 | 0.11 | 2.50 | 2.12 |
-| Relation and relative (S/O, W/O, पत्नी) | 0.00 | 0.05 | 0.44 | 0.53 |
-| Alias (URF, ALIAS, @, उर्फ, (எ), A/B) | 0.67 | 0.27 | 1.11 | 1.11 |
-| SEC numbering of namesakes ((1), -2, II) | 0.75 | 0.00 | 0.00 | 0.00 |
-| Bracketed or other notes (nickname, caste, symbol, number) | 0.04 | 0.03 | 1.95 | 1.48 |
-| Repaired typing slip (zero for O, comma-reversed order) | 0.26 | 0.00 | 1.47 | 1.73 |
-| Has initials | 0.04 | 0.06 | 20.60 | 21.83 |
-| Placeholder, not a name (VACANT, NOTA) | 0.00 | 0.00 | 0.00 | 0.00 |
+| Material                                                   |     Bihar |   Rajasthan |   TCPD lok sabha |   TCPD assembly |
+|:-----------------------------------------------------------|----------:|------------:|-----------------:|----------------:|
+| Distinct printed names                                     | 407718.00 |    31409.00 |         72788.00 |       321291.00 |
+| Title (DR, SHRI, SMT, KUMARI, श्रीमती, TMT)                |      0.69 |        0.11 |             2.50 |            2.12 |
+| Relation and relative (S/O, W/O, पत्नी)                    |      0.00 |        0.05 |             0.44 |            0.53 |
+| Alias (URF, ALIAS, @, उर्फ, (எ), A/B)                      |      0.67 |        0.27 |             1.11 |            1.11 |
+| SEC numbering of namesakes ((1), -2, II)                   |      0.75 |        0.00 |             0.00 |            0.00 |
+| Bracketed or other notes (nickname, caste, symbol, number) |      0.04 |        0.03 |             1.95 |            1.48 |
+| Repaired typing slip (zero for O, comma-reversed order)    |      0.26 |        0.00 |             1.47 |            1.73 |
+| Has initials                                               |      0.04 |        0.06 |            20.60 |           21.83 |
+| Placeholder, not a name (VACANT, NOTA)                     |      0.00 |        0.00 |             0.00 |            0.00 |
 
 Examples (two per source where any):
 

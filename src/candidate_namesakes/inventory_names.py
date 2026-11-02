@@ -58,24 +58,22 @@ def main():
             examples.setdefault(field, []).extend(
                 f"`{r.raw}` → name `{r.name}`" for r in sample.itertuples()
             )
-    table = pd.DataFrame(shares)
-    header = "| Material | " + " | ".join(table.columns) + " |"
-    lines = [header, "|---|" + "---:|" * len(table.columns)]
-    lines.append(
-        "| Distinct printed names | "
-        + " | ".join(f"{int(v):,}" for v in table.loc["distinct names"])
-        + " |"
+    table = pd.DataFrame(shares).rename(
+        index={**FIELDS, "distinct names": "Distinct printed names"}
     )
-    for field, label in FIELDS.items():
-        cells = " | ".join(f"{v:.2f}" for v in table.loc[field])
-        lines.append(f"| {label} | {cells} |")
+    order = ["Distinct printed names", *FIELDS.values()]
+    lines = [
+        table.loc[order]
+        .reset_index(names="Material")
+        .to_markdown(index=False, floatfmt=".2f")
+    ]
     lines.append("")
     lines.append("Examples (two per source where any):")
     lines.append("")
     for field, label in FIELDS.items():
         lines.append(f"- **{label}**: " + "; ".join(examples.get(field, [])[:8]))
     update_readme("\n".join(lines), marker="inventory", path=PAGE)
-    print("\n".join(lines[: len(FIELDS) + 3]))
+    print(lines[0])
 
 
 if __name__ == "__main__":

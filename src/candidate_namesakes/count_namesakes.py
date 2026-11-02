@@ -174,25 +174,24 @@ def summarize_posts(contests):
 
 
 def summary_markdown(summary):
-    header = (
-        "| State | Year | Office | Election | Contests | Mean candidates "
-        "| Mean namesakes, exact | Mean namesakes, spelling "
-        "| Contests with a namesake, exact (%) "
-        "| Contests with a namesake, spelling (%) | Contests with a look-alike (%) "
-        "| Repeated records dropped |\n"
-        "|---|---|---|---|---:|---:|---:|---:|---:|---:|---:|---:|\n"
-    )
     rows = summary.sort_values(["state", "year", "contests"], ascending=[1, 1, 0])
-    lines = [
-        f"| {r.state} | {r.year} | {r.tier_local.title()} (`{r.tier}`) "
-        f"| {r.election_type if isinstance(r.election_type, str) else 'not recorded'} "
-        f"| {r.contests:,} | {r.mean_candidates:.1f} | {r.mean_namesake_exact:.2f} "
-        f"| {r.mean_namesake_spelling:.2f} | {r.contests_with_namesake_exact_pct:.1f} "
-        f"| {r.contests_with_namesake_spelling_pct:.1f} "
-        f"| {r.contests_with_lookalike_pct:.1f} | {r.duplicate_records:,} |"
-        for r in rows.itertuples()
-    ]
-    return header + "\n".join(lines)
+    table = pd.DataFrame(
+        {
+            "State": rows.state,
+            "Year": rows.year,
+            "Office": rows.tier_local.str.title() + " (`" + rows.tier + "`)",
+            "Election": rows.election_type.fillna("not recorded"),
+            "Contests": rows.contests,
+            "Mean candidates": rows.mean_candidates,
+            "Exact namesake (%)": rows.contests_with_namesake_exact_pct,
+            "Spelling namesake (%)": rows.contests_with_namesake_spelling_pct,
+            "Look-alike (%)": rows.contests_with_lookalike_pct,
+            "Repeated records dropped": rows.duplicate_records,
+        }
+    )
+    # Thousands separators for counts only, not for the year.
+    counts = ("", "", "", "", ",", "", "", "", "", ",")
+    return table.to_markdown(index=False, floatfmt=".1f", intfmt=counts)
 
 
 def update_readme(table, marker="summary", path=Path("README.md")):

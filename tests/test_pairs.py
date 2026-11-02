@@ -37,8 +37,9 @@ def test_unlike_names_are_dropped():
     assert not is_kept(*score("RAM KUMAR", "SURES PRASAD")[:4])
 
 
-def test_an_initial_is_not_a_shared_word():
-    assert not score("K MURALIDARAN", "M K SASIDARAN")[4]
+def test_different_names_with_shared_initials_are_not_lookalikes():
+    similarity = score("K MURALIDARAN", "M K SASIDARAN")[3]
+    assert similarity is None or similarity < 0.7
 
 
 def test_alias_match():
@@ -50,3 +51,11 @@ def test_alias_match():
     two = Row(name_spelling="MANOJ SAH", name_alias_keys=[])
     three = Row(name_spelling="RAJU SAH", name_alias_keys=[])
     assert alias_match(one, two) and not alias_match(one, three)
+
+
+def test_one_full_word_and_an_initial():
+    from candidate_namesakes.names import fold
+
+    a, b = fold("PANNEERSELVAM O"), fold("PANNERSELVAM O")
+    assert score(a, b)[4] and score(a, b)[3] >= 0.7
+    assert score(fold("PANNEERSELVAM O"), fold("PANNIR SELVAM M"))[1]

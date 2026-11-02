@@ -43,28 +43,205 @@
         "sha256": "6159e090d7d0d0e15531ff76b8429457121d7611b7752864d5123a8d75e01fc7",
         "rows": 483565
       }
+    ],
+    "recent": [
+      {
+        "election": "lok_sabha",
+        "year": 2024,
+        "month": 6,
+        "format": "eci_report",
+        "path": "data/raw/eci/ge_2024_constituency_wise_detailed_result.csv",
+        "dataset": "ECI Statistical Report, General Election to Lok Sabha 2024, report 33: Constituency Wise Detailed Result",
+        "retrieved_from": "copy in in-rolls/wasted_votes@704474a (committed 2025-08-23); the original download URL was not recorded",
+        "sha256": "750fc0f29addaf051209b36ac51bb2c5497b345c427391e1dd58d08e5d4690fd"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 10,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2024Assembly-HR.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2024Assembly-HR.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "c90b3873d959f3c570e43dde91405e6c58517629b5f8ff5f3fbea5fda5b968b6"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 11,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2024Assembly-JH.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2024Assembly-JH.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "380e8c06592a89015846e862b596ecbae1ba2adb213d621230a7fd10b4d8ea20"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 10,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2024Assembly-JK.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2024Assembly-JK.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "4ac9d0c5c79b74c3ccfe6e3bde828074f9918c20bbbdbdc5f70f9fa0f210d1c0"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 11,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2024Assembly-MH.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2024Assembly-MH.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "16aaaf99540945d460b49914d43109b519643574c2a001d11e8500ef511dfda3"
+      },
+      {
+        "election": "assembly",
+        "year": 2025,
+        "month": 11,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2025Assembly-BR.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2025Assembly-BR.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "1115ac0f0511e19ead07074c70616b521e84dd0d5868e294e5db430bb4f760e4"
+      },
+      {
+        "election": "assembly",
+        "year": 2025,
+        "month": 2,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2025Assembly-DL.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2025Assembly-DL.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "e3b85e44d85e2b137960f5517967bff2a3f96f3fb9156ad98a0c26206bca9924"
+      },
+      {
+        "election": "assembly",
+        "year": 2026,
+        "month": 5,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2026Assembly-AS.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2026Assembly-AS.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "cd55f652433f22e4ee70f3615ab5d979871eed7cac8af90193fcd1256bac3150"
+      },
+      {
+        "election": "assembly",
+        "year": 2026,
+        "month": 5,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2026Assembly-KL.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2026Assembly-KL.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "69d940dd681fa8c540c86bceba9a0d67c8c66d5b7640ded0479e1c9e2902cb7c"
+      },
+      {
+        "election": "assembly",
+        "year": 2026,
+        "month": 5,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2026Assembly-PY.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2026Assembly-PY.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "7dee71687c8a198a1311cecd66a9ee6a8eba65d4a28913a9fbe45b1fd7b6353f"
+      },
+      {
+        "election": "assembly",
+        "year": 2026,
+        "month": 5,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2026Assembly-TN.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2026Assembly-TN.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "eb0302e0b38fc9ec0a902a9242742a6ff92b8a74b568313d9fc61737041a86b5"
+      },
+      {
+        "election": "assembly",
+        "year": 2026,
+        "month": 5,
+        "format": "india_votes_data",
+        "path": "data/raw/india_votes_data/2026Assembly-WB.csv",
+        "dataset": "thecont1/india-votes-data (MIT), scraped from results.eci.gov.in",
+        "retrieved_from": "https://raw.githubusercontent.com/thecont1/india-votes-data/7d8cf637f83d223b178d11659103a1f52647367a/data/csv/2026Assembly-WB.csv",
+        "retrieved_at": "2026-11-02",
+        "sha256": "bcc9163435d5b09ffa007cd8208f542aaa027ed94a32c54b37f7d3ea17b36d04"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 6,
+        "format": "india_votes_data",
+        "path": "data/extracted/wayback/2024Assembly-AP.csv",
+        "dataset": "ECI results.eci.gov.in constituency pages as kept by the Internet Archive",
+        "retrieved_from": "https://web.archive.org/web/<latest status-200 capture>id_/https://results.eci.gov.in/AcResultGenJune2024/; each row's snapshot URL is in the file",
+        "retrieved_at": "2026-11-02",
+        "sha256": "ca8d4bb9890713269e63618217731cb02b9715578e8ed433efdfdc2ee09ff183"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 6,
+        "format": "india_votes_data",
+        "path": "data/extracted/wayback/2024Assembly-OD.csv",
+        "dataset": "ECI results.eci.gov.in constituency pages as kept by the Internet Archive",
+        "retrieved_from": "https://web.archive.org/web/<latest status-200 capture>id_/https://results.eci.gov.in/AcResultGenJune2024/; each row's snapshot URL is in the file",
+        "retrieved_at": "2026-11-02",
+        "sha256": "5d2c3eaa2400a87e4465b6dd3dd848464944d9690b85f6b6b854519f7f5b29b0"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 6,
+        "format": "india_votes_data",
+        "path": "data/extracted/wayback/2024Assembly-AR.csv",
+        "dataset": "ECI results.eci.gov.in constituency pages as kept by the Internet Archive",
+        "retrieved_from": "https://web.archive.org/web/<latest status-200 capture>id_/https://results.eci.gov.in/AcResultGen2ndJune2024/; each row's snapshot URL is in the file",
+        "retrieved_at": "2026-11-02",
+        "sha256": "dab7bdca4733076771d945f76d509cb64bb28b609ad4d9f70cc87a377092c2a2"
+      },
+      {
+        "election": "assembly",
+        "year": 2024,
+        "month": 6,
+        "format": "india_votes_data",
+        "path": "data/extracted/wayback/2024Assembly-SK.csv",
+        "dataset": "ECI results.eci.gov.in constituency pages as kept by the Internet Archive",
+        "retrieved_from": "https://web.archive.org/web/<latest status-200 capture>id_/https://results.eci.gov.in/AcResultGen2ndJune2024/; each row's snapshot URL is in the file",
+        "retrieved_at": "2026-11-02",
+        "sha256": "0607290913aa4da1b88b228bf2cbcb01b00de457729b6c707eb1a0dd52c17a4d"
+      }
     ]
   },
   "outputs": [
     {
       "path": "data/release/contests.parquet",
       "rows": 474969,
-      "sha256": "b09f04ab55f18620752350c0332cf812e364e595d65c002893fe2174e277172e"
+      "sha256": "f8e0b5cec300657403f15dba9918a75bd7e6ca906bd7609b577a3ae423aed095"
     },
     {
       "path": "data/release/namesake_candidates.parquet",
-      "rows": 45442,
-      "sha256": "f686b14580946a8a8ac26e38bd4d22147e47f328c8f541ee07d24fbcc0b5fabe"
+      "rows": 45444,
+      "sha256": "672ba18abb5cb3084a6a5116a9bd100f8a771e0edd0e8c7a8694d0e61f9676c0"
     },
     {
       "path": "data/release/name_pairs.parquet",
-      "rows": 140111,
-      "sha256": "aea4af1f7553a22fe50462e6b37409ac57c0d01aaaee1a279e7527ccf4743776"
+      "rows": 140128,
+      "sha256": "db6556ba3e66706052a4b18dc5bddf7525370cdc6d813ba751d44d4f7cc313b1"
     },
     {
       "path": "data/release/summary.csv",
       "rows": 16,
-      "sha256": "e39c67ce9900c8cc0cb388b2d7e4ea94df2c7d64795975b4ac244ea91ed907c7"
+      "sha256": "89fa679099146a8c721ca8e04e989054a754df122b3fe4d510a7a34e21edb625"
     }
   ]
 }
