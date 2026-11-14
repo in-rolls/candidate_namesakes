@@ -1,6 +1,6 @@
 .PHONY: fetch build check-votes tcpd figures names test lint
 
-COMMIT = 112e86b749257aba5b10106f5727e36019e924f4
+COMMIT = 8326acf957a96a75769f973a096169f80c270270
 BASE = https://raw.githubusercontent.com/in-rolls/local_elections/$(COMMIT)/data/master
 RAW = data/raw/local_elections
 STATES = bihar rajasthan

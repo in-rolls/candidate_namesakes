@@ -1,13 +1,13 @@
 {
   "source": {
     "repository": "https://github.com/in-rolls/local_elections",
-    "commit": "112e86b749257aba5b10106f5727e36019e924f4",
+    "commit": "8326acf957a96a75769f973a096169f80c270270",
     "inputs": [
       {
         "state": "Bihar",
         "path": "data/raw/local_elections/candidates_bihar.parquet",
         "source_path": "data/master/candidates_bihar.parquet",
-        "sha256": "98df872c1e9e4e53cab53018fa420bf951ed0a45f74d27960e686fff10e6698b",
+        "sha256": "f85efd711b8813ebde2228d2ef279d5d3dcd28fdf702bc9f630d78b67df191d4",
         "rows": 1569245,
         "numbering": true
       },
@@ -15,7 +15,7 @@
         "state": "Rajasthan",
         "path": "data/raw/local_elections/candidates_rajasthan.parquet",
         "source_path": "data/master/candidates_rajasthan.parquet",
-        "sha256": "fd7e51d9944b4bd0508f4a14a0d51140151a6c16a7a12351b015ad1eeeb6c098",
+        "sha256": "fdcd416c4e7ea24a9f5504e387a91fa692f05ac8f9e7a5b6a359c1a793899381",
         "rows": 68202,
         "numbering": true
       }
@@ -226,7 +226,7 @@
     {
       "path": "data/release/contests.parquet",
       "rows": 474969,
-      "sha256": "f8e0b5cec300657403f15dba9918a75bd7e6ca906bd7609b577a3ae423aed095"
+      "sha256": "9a35dfd39063b36f5fc7fbe6ca4f03bb6e4e0bd59223c4521fb49f17dc296f0a"
     },
     {
       "path": "data/release/namesake_candidates.parquet",
