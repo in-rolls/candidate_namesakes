@@ -38,7 +38,7 @@ Planting namesakes only matters politically if voters are fooled, and if enough 
 
 \section{Data and Design}
 
-\paragraph{Data.} We use every general-election candidate in the Trivedi Centre for Political Data's Lok Dhaba files \citep{agarwal2021}: Lok Sabha elections 1962--2024 and assembly elections 1962--2026, \nTcpdCand{} candidate records after dropping by-elections and state-years whose names are printed mostly as initials. Names are compared at three levels: exact or spelling-equivalent (identical after folding spellings of one spoken name), differing only in initials (\emph{K.N. Rao} and \emph{Rao}), and look-alike (one name contains the other, or the given names are at least 0.7 similar after shared words are set aside). The first two together are \emph{close names}.
+\paragraph{Data.} We use every general-election candidate in the Trivedi Centre for Political Data's Lok Dhaba files \citep{agarwal2021}, which end with the 2019 Lok Sabha and the 2023 assembly elections, extended with the Election Commission's results for the 2024 Lok Sabha and the 2024--2026 assemblies (the five assemblies elected in December 2023 are missing): \nTcpdCand{} candidate records after dropping by-elections and state-years whose names are printed mostly as initials. Names are compared at three levels: exact or spelling-equivalent (identical after folding spellings of one spoken name), differing only in initials (\emph{K.N. Rao} and \emph{Rao}), and look-alike (one name contains the other, or the given names are at least 0.7 similar after shared words are set aside). The first two together are \emph{close names}.
 
 \paragraph{Comparison.} Planted namesakes are independents, and almost all of them poll little. Comparing them with every losing candidate would set them against runners-up who poll 30--40\% of the vote, so we compare independents with independents in the same contest. The sample is the \nInd{} independents placed third or lower in \nIndContests{} contests with at least two such independents; \nTreatedTopTwo{} of the \nTreatedAll{} independents who resemble a leader finished first or second, so this restriction drops almost no namesakes while removing strong rebel independents from the comparison group. Table~\ref{tab:targets} column 4 keeps all independents. An independent is treated if its name resembles a party candidate who finished first or second (the \emph{leader}). Because finishing first or second is itself an outcome, we also define the target before the election, as an incumbent or a national-party candidate (Table~\ref{tab:targets} column 3).
 
@@ -114,7 +114,7 @@ Two more reasons for caution. The rule applied nationwide on one date, so the be
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\linewidth]{photo_rule.png}
-\caption{Top: close-name premium by period, with 95\% confidence intervals; the dashed line marks 1 May 2015. Bottom: the estimated change in the premium after each candidate break date, from a model with one break (Table~\ref{tab:photo}, columns 1 and 4); red marks the photograph rule. Standard errors clustered by constituency.}
+\caption{Top: close-name premium by period; the red line marks 1 May 2015. Bottom: the estimated change in the premium after each candidate break date, from a model with one break (Table~\ref{tab:photo}, columns 1 and 4); gray dots are placebo dates and red marks the photograph rule. Gray bars and bands are 95\% confidence intervals. Standard errors clustered by constituency.}
 \label{fig:photo}
 \end{figure}
 

@@ -27,6 +27,7 @@ import numpy as np
 import pandas as pd
 import pyfixest as pf
 
+from candidate_namesakes import plotstyle
 from candidate_namesakes.check_votes import contests_with_votes, resemblance_to
 from candidate_namesakes.count_namesakes import load as load_local
 from candidate_namesakes.tcpd import PHOTO_RULE, read_tcpd
@@ -321,43 +322,42 @@ def event_study(d):
 
 
 def plot_photo(es_fits, breaks):
+    plotstyle.apply()
     fig, axes = plt.subplots(2, 2, figsize=(9.0, 6.4))
     x = np.arange(len(PERIODS))
+    units = {"rank_pct": "Percentile points", "log_votes": "Log points"}
     for col, out in enumerate(["rank_pct", "log_votes"]):
         fit = es_fits[out]
         est = np.array([fit.coef()[k] for k, _ in PERIODS])
         se = np.array([fit.se()[k] for k, _ in PERIODS])
         ax = axes[0, col]
-        ax.axhline(0, color="#666666", linewidth=0.8)
-        ax.axvline(4.5, color="#b22222", linewidth=1.0, linestyle="--")
-        ax.errorbar(x, est, yerr=1.96 * se, fmt="o", color="#1f4e79", capsize=3)
+        ax.axhline(0, color="0.4", lw=0.8)
+        ax.axvline(4.5, color=plotstyle.RULE, lw=1)
+        plotstyle.interval_bars(ax, x, est, se)
         ax.set_xticks(x)
-        ax.set_xticklabels([lbl for _, lbl in PERIODS], fontsize=7.5, rotation=30)
-        ax.set_title(f"Close-name premium by period: {OUTCOMES[out]}", fontsize=9.5)
+        ax.set_xticklabels([lbl for _, lbl in PERIODS], fontsize=8, rotation=30)
+        ax.set_ylabel(units[out])
+        plotstyle.tidy(ax, f"Premium by period: {OUTCOMES[out].lower()}")
+        ax.text(4.6, ax.get_ylim()[1], "photos on\nEVMs, 2015", color=plotstyle.RULE,
+                va="top", fontsize=8.5)  # fmt: skip
 
-        b = breaks[breaks.outcome == out]
+        b = breaks[breaks.outcome == out].sort_values("break")
         real = np.isclose(b["break"], PHOTO_YEAR)
         ax = axes[1, col]
-        ax.axhline(0, color="#666666", linewidth=0.8)
-        for mask, color, label in [
-            (~real, "#888888", "Placebo break date"),
-            (real, "#b22222", "May 2015 photo rule"),
-        ]:
-            ax.errorbar(
-                b["break"][mask],
-                b["estimate"][mask],
-                yerr=1.96 * b["se"][mask],
-                fmt="o",
-                color=color,
-                capsize=3,
-                label=label,
-            )
-        ax.set_title(f"Change in premium after break: {OUTCOMES[out]}", fontsize=9.5)
-        ax.set_xlabel("Break date", fontsize=9)
-        ax.legend(fontsize=8, frameon=False)
-    for ax in axes.ravel():
-        ax.spines["top"].set_visible(False)
-        ax.spines["right"].set_visible(False)
+        ax.axhline(0, color="0.4", lw=0.8)
+        low, high = b.estimate - 1.96 * b.se, b.estimate + 1.96 * b.se
+        ax.fill_between(b["break"], low, high, color=plotstyle.BAND, lw=0)
+        ax.plot(b["break"], b.estimate, color="black", lw=1.2)
+        ax.scatter(b["break"][~real], b.estimate[~real], color=plotstyle.DOT, s=14,
+                   zorder=3)  # fmt: skip
+        ax.scatter(b["break"][real], b.estimate[real], color=plotstyle.RULE, s=30,
+                   zorder=4)  # fmt: skip
+        ax.annotate("May 2015", (PHOTO_YEAR, float(b.estimate[real].iloc[0])),
+                    xytext=(-6, -14), textcoords="offset points", ha="right",
+                    color=plotstyle.RULE, fontsize=8.5)  # fmt: skip
+        ax.set_xlabel("Break date")
+        ax.set_ylabel(units[out])
+        plotstyle.tidy(ax, "Change after each break date")
     fig.tight_layout()
     fig.savefig(FIGS / "photo_rule.png", dpi=220)
     plt.close(fig)
