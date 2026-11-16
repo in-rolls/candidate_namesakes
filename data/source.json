@@ -47,16 +47,16 @@
     {
       "election": "lok_sabha",
       "path": "data/raw/eci_results/GE_2024.csv.gz",
-      "url": "https://raw.githubusercontent.com/in-rolls/eci_results/d89b109/data/release/GE_2024.csv.gz",
+      "url": "https://raw.githubusercontent.com/in-rolls/eci_results/529cced/data/release/GE_2024.csv.gz",
       "sha256": "8b5ee90c3a1af8cb3d9140b67c82e1046c4a7c7f5e242b49591b9c2d8238f446",
-      "dataset": "in-rolls/eci_results@d89b109: Lok Sabha 2024 from ECI report 33, in TCPD's column layout"
+      "dataset": "in-rolls/eci_results@529cced: Lok Sabha 2024 from ECI report 33, in TCPD's column layout"
     },
     {
       "election": "assembly",
-      "path": "data/raw/eci_results/AE_2024_2026.csv.gz",
-      "url": "https://raw.githubusercontent.com/in-rolls/eci_results/d89b109/data/release/AE_2024_2026.csv.gz",
-      "sha256": "8dbdfd666834c062a69df0d2e5c296ddaeca16f6ce33212f255a80b879e979bd",
-      "dataset": "in-rolls/eci_results@d89b109: assemblies of 2024-2026 from ECI results, in TCPD's column layout"
+      "path": "data/raw/eci_results/AE_2023_2026.csv.gz",
+      "url": "https://raw.githubusercontent.com/in-rolls/eci_results/529cced/data/release/AE_2023_2026.csv.gz",
+      "sha256": "26d2911035ca4665ab3bc4bed23abda961bcfc1384fa094e94a55cf541efd940",
+      "dataset": "in-rolls/eci_results@529cced: assemblies of November 2023 to 2026 from ECI reports and results website, in TCPD's column layout"
     }
   ]
 }

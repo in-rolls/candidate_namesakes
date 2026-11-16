@@ -69,9 +69,7 @@ SUNITA DEVI head the list. Women's seats gather many "X Devi" candidates.
 ## Lok Sabha and assembly elections
 
 Every Lok Sabha candidate from 1962 to 2024 and every state assembly
-candidate from 1962 to May 2026, except five assemblies elected in December
-2023 (Rajasthan, Madhya Pradesh, Chhattisgarh, Telangana, Mizoram), whose
-results are not available in full (see Source). For each general-election contest, the winner's and runner-up's
+candidate from 1962 to May 2026 (see Source). For each general-election contest, the winner's and runner-up's
 lower-placed rivals are matched at each level. Contests from by-elections,
 and state-years whose names TCPD prints mostly as initials and a surname
 ("K.N. RAO": most of 1967), are left out;
@@ -105,11 +103,11 @@ suggestive, not proof of planting.
 
 | Election   | Match level   |   Leader-minor pairs (per 10,000) |   Minor-minor pairs (per 10,000) |   Ratio |
 |:-----------|:--------------|----------------------------------:|---------------------------------:|--------:|
-| Assembly   | exact         |                               8.1 |                              4.8 |    1.69 |
-| Assembly   | spelling      |                               9.7 |                              5.4 |    1.79 |
-| Assembly   | alias         |                               9.8 |                              5.4 |    1.81 |
-| Assembly   | initials      |                              23.2 |                             11.1 |    2.10 |
-| Assembly   | lookalike     |                              47.9 |                             27.9 |    1.72 |
+| Assembly   | exact         |                               8.3 |                              4.8 |    1.75 |
+| Assembly   | spelling      |                               9.9 |                              5.4 |    1.85 |
+| Assembly   | alias         |                              10.1 |                              5.4 |    1.87 |
+| Assembly   | initials      |                              23.3 |                             10.9 |    2.13 |
+| Assembly   | lookalike     |                              48.1 |                             27.6 |    1.75 |
 | Lok Sabha  | exact         |                               7.6 |                              2.9 |    2.58 |
 | Lok Sabha  | spelling      |                               8.7 |                              3.5 |    2.49 |
 | Lok Sabha  | alias         |                               8.7 |                              3.5 |    2.50 |
@@ -253,11 +251,10 @@ one 1995 row TCPD has since corrected. Paths, URLs and SHA-256 are in
 
 After TCPD's coverage ends, results come from
 [in-rolls/eci_results](https://github.com/in-rolls/eci_results) (commit
-`d89b109`): the 2024 Lok Sabha and the 2024-2026 assemblies from the Election
-Commission's report and results website, in TCPD's column layout, so the two
-are appended without reshaping. Its README documents sources, checks and the
-columns it leaves empty. Not yet covered there: the November-December 2023
-assemblies (Rajasthan, Madhya Pradesh, Chhattisgarh, Telangana, Mizoram) and
+`529cced`): the 2024 Lok Sabha and the assemblies from November 2023 to 2026
+from the Election Commission's reports and results website, in TCPD's column
+layout, so the two are appended without reshaping. Its README documents
+sources, checks and the columns it leaves empty. Not covered there:
 by-elections.
 
 ## Prior work
