@@ -103,11 +103,11 @@ suggestive, not proof of planting.
 
 | Election   | Match level   |   Leader-minor pairs (per 10,000) |   Minor-minor pairs (per 10,000) |   Ratio |
 |:-----------|:--------------|----------------------------------:|---------------------------------:|--------:|
-| Assembly   | exact         |                               8.3 |                              4.8 |    1.75 |
+| Assembly   | exact         |                               8.4 |                              4.8 |    1.75 |
 | Assembly   | spelling      |                               9.9 |                              5.4 |    1.85 |
 | Assembly   | alias         |                              10.1 |                              5.4 |    1.87 |
-| Assembly   | initials      |                              23.3 |                             10.9 |    2.13 |
-| Assembly   | lookalike     |                              48.1 |                             27.6 |    1.75 |
+| Assembly   | initials      |                              23.2 |                             10.9 |    2.13 |
+| Assembly   | lookalike     |                              48.2 |                             27.6 |    1.75 |
 | Lok Sabha  | exact         |                               7.6 |                              2.9 |    2.58 |
 | Lok Sabha  | spelling      |                               8.7 |                              3.5 |    2.49 |
 | Lok Sabha  | alias         |                               8.7 |                              3.5 |    2.50 |
@@ -251,8 +251,8 @@ one 1995 row TCPD has since corrected. Paths, URLs and SHA-256 are in
 
 After TCPD's coverage ends, results come from
 [in-rolls/eci_results](https://github.com/in-rolls/eci_results) (commit
-`529cced`): the 2024 Lok Sabha and the assemblies from November 2023 to 2026
-from the Election Commission's reports and results website, in TCPD's column
+`0bc2b71`): the 2024 Lok Sabha and the assemblies from November 2023 to 2026
+from the Election Commission's statistical reports, in TCPD's column
 layout, so the two are appended without reshaping. Its README documents
 sources, checks and the columns it leaves empty. Not covered there:
 by-elections.
