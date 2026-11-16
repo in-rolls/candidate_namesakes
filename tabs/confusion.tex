@@ -1,0 +1,53 @@
+\begin{threeparttable}
+\begingroup
+\renewcommand\cellalign{t}
+\renewcommand\arraystretch{1}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+\toprule
+ & \multicolumn{1}{c}{Rank (percentile pts.)} & \multicolumn{1}{c}{Log(1 + votes)} & \multicolumn{1}{c}{Votes (Poisson)} \\
+\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4}
+ & (1) & (2) & (3) \\
+\midrule
+\addlinespace[1ex]
+Exact / spelling & \makecell{7.81 \\ (1.48)} & \makecell{0.17 \\ (0.04)} & \makecell{-0.04 \\ (0.12)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Initials differ & \makecell{8.03 \\ (1.25)} & \makecell{0.16 \\ (0.03)} & \makecell{-0.11 \\ (0.07)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Look-alike & \makecell{4.77 \\ (0.96)} & \makecell{0.09 \\ (0.03)} & \makecell{-0.18 \\ (0.06)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Placebo: exact / spelling & \makecell{1.10 \\ (1.69)} & \makecell{-0.02 \\ (0.05)} & \makecell{-0.02 \\ (0.15)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Placebo: initials differ & \makecell{1.31 \\ (1.95)} & \makecell{0.03 \\ (0.05)} & \makecell{-0.02 \\ (0.16)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Placebo: look-alike & \makecell{2.41 \\ (0.87)} & \makecell{0.07 \\ (0.03)} & \makecell{0.06 \\ (0.07)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Log name frequency & \makecell{-0.18 \\ (0.06)} & \makecell{-0.01 \\ (0.00)} & \makecell{-0.01 \\ (0.00)} \\
+\addlinespace[0.5ex]
+\midrule
+\addlinespace[1ex]
+Contest fixed effects & x & x & x \\
+\addlinespace[0.5ex]
+\midrule
+\addlinespace[1ex]
+Independent namesakes of a leader & 3,074 & 3,074 & 3,074 \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Contests & 40,937 & 40,937 & 40,937 \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Candidates & 243,651 & 243,651 & 243,651 \\
+\addlinespace[0.5ex]
+\bottomrule
+\end{tabularx}
+\endgroup
+\noindent\begin{minipage}{\linewidth}\smallskip\footnotesize
+Independents placed third or lower, in contests with at least two of them. Rows 1-3: resemblance to a party candidate placed first or second; rows 4-6: to a party candidate placed third or lower. Standard errors clustered by constituency in parentheses.\end{minipage}
+
+\end{threeparttable}

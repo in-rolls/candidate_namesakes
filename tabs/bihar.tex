@@ -1,0 +1,41 @@
+\begin{threeparttable}
+\begingroup
+\renewcommand\cellalign{t}
+\renewcommand\arraystretch{1}
+\setlength{\tabcolsep}{3pt}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}l>{\centering\arraybackslash}X>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+\toprule
+ & \multicolumn{1}{c}{Rank (percentile pts.)} & \multicolumn{1}{c}{Log(1 + votes)} & \multicolumn{1}{c}{Votes (Poisson)} \\
+\cmidrule(lr){2-2} \cmidrule(lr){3-3} \cmidrule(lr){4-4}
+ & (1) & (2) & (3) \\
+\midrule
+\addlinespace[1ex]
+Same name / alias & \makecell{-0.47 \\ (0.88)} & \makecell{-0.01 \\ (0.02)} & \makecell{-0.02 \\ (0.03)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+One name contains the other & \makecell{-5.31 \\ (1.76)} & \makecell{-0.09 \\ (0.04)} & \makecell{-0.03 \\ (0.07)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Similarity 0.8+ & \makecell{-0.91 \\ (1.50)} & \makecell{-0.01 \\ (0.03)} & \makecell{-0.03 \\ (0.05)} \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Similarity 0.6-0.8 & \makecell{0.09 \\ (0.50)} & \makecell{-0.00 \\ (0.01)} & \makecell{-0.01 \\ (0.02)} \\
+\addlinespace[0.5ex]
+\midrule
+\addlinespace[1ex]
+Contest fixed effects & x & x & x \\
+\addlinespace[0.5ex]
+\midrule
+\addlinespace[1ex]
+Contests & 155,194 & 155,194 & 155,194 \\
+\addlinespace[0.5ex]
+\addlinespace[0.5ex]
+Candidates & 646,399 & 646,399 & 646,399 \\
+\addlinespace[0.5ex]
+\bottomrule
+\end{tabularx}
+\endgroup
+\noindent\begin{minipage}{\linewidth}\smallskip\footnotesize
+Bihar panchayat candidates (2016, 2021, all six offices) placed third or lower, in contests with complete vote counts and at least two such candidates. Resemblance is to the contest's winner. All models control for log name frequency. Standard errors clustered by contest.\end{minipage}
+
+\end{threeparttable}

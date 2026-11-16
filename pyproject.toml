@@ -10,11 +10,13 @@ license-files = ["LICENSE"]
 keywords = ["India", "Bihar", "elections", "panchayats", "candidates", "namesakes"]
 dependencies = [
     "beautifulsoup4>=4.13",
+    "maketables>=0.2.0",
     "matplotlib>=3.10",
     "museclient",
     "pandas>=2.2",
     "patsy>=1.0",
     "pyarrow>=21",
+    "pyfixest>=0.70.0",
     "rapidfuzz>=3.14",
     "requests>=2.32",
     "statsmodels>=0.15",
