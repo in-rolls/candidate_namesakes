@@ -52,91 +52,19 @@ def is_abbreviated(name):
     )
 
 
-STATE_CODES = {
-    "HR": "Haryana", "JH": "Jharkhand", "JK": "Jammu_&_Kashmir", "MH": "Maharashtra",
-    "BR": "Bihar", "DL": "Delhi", "AS": "Assam", "KL": "Kerala", "PY": "Puducherry",
-    "TN": "Tamil_Nadu", "WB": "West_Bengal", "AP": "Andhra_Pradesh",
-    "AR": "Arunachal_Pradesh", "OD": "Odisha", "SK": "Sikkim",
-}  # fmt: skip
-
-
-def tcpd_state(name):
-    return str(name).strip().replace(" and ", " & ").replace(" ", "_")
-
-
-def read_eci_report(path):
-    """ECI statistical report 33, Constituency Wise Detailed Result (2024 GE)."""
-    report = pd.read_csv(path)
-    report = report[report["Candidate Name"].notna()]
-    return pd.DataFrame(
-        {
-            "State_Name": report["State Name"].map(tcpd_state),
-            "Constituency_No": report["PC Name"].str.strip(),
-            "Constituency_Name": report["PC Name"].str.strip(),
-            "Candidate": report["Candidate Name"],
-            "Party": report["Party Name"],
-            "Votes": pd.to_numeric(report["Total"], errors="coerce"),
-        }
-    )
-
-
-def read_india_votes_data(path):
-    """thecont1/india-votes-data per-election CSV, scraped from results.eci.gov.in."""
-    table = pd.read_csv(path)
-    party = table.party.where(table.party.ne("Independent"), "IND")
-    return pd.DataFrame(
-        {
-            "State_Name": table.election_state.map(STATE_CODES),
-            "Constituency_No": table.constituency_no,
-            "Constituency_Name": table.constituency,
-            "Candidate": table.candidate,
-            "Party": party.where(~table.candidate.str.upper().eq("NOTA"), "NOTA"),
-            "Votes": table.evm_votes + table.postal_votes,
-        }
-    )
-
-
-def read_recent(item):
-    """A post-TCPD election, reshaped to the TCPD columns this module uses."""
-    reader = (
-        read_eci_report if item["format"] == "eci_report" else read_india_votes_data
-    )
-    frame = reader(item["path"])
-    nota = frame.Party.eq("NOTA") | frame.Candidate.str.upper().isin(
-        ["NOTA", "NONE OF THE ABOVE"]
-    )
-    frame.loc[nota, "Party"] = "NOTA"
-    keys = ["State_Name", "Constituency_No"]
-    frame["Valid_Votes"] = frame.groupby(keys).Votes.transform("sum")
-    frame = frame[~nota].copy()
-    frame["Position"] = (
-        frame.groupby(keys)
-        .Votes.rank(ascending=False, method="first", na_option="bottom")
-        .astype(int)
-    )
-    frame["Year"], frame["month"] = item["year"], item["month"]
-    frame["Assembly_No"], frame["Poll_No"] = pd.NA, 0
-    return frame
-
-
 def read_tcpd(source):
+    """TCPD's files, then in-rolls/eci_results for the elections after them.
+
+    Both are in TCPD's column layout, so they are simply appended.
+    """
     frames = []
-    for item in source["tcpd"]:
+    for item in source["tcpd"] + source["eci_results"]:
         found = sha256(item["path"])
         if found != item["sha256"]:
             raise SystemExit(
                 f"{item['path']}: sha256 {found}, expected {item['sha256']}"
             )
         frame = pd.read_csv(item["path"], low_memory=False)
-        frame["election"] = item["election"]
-        frames.append(frame)
-    for item in source.get("recent", []):
-        found = sha256(item["path"])
-        if found != item["sha256"]:
-            raise SystemExit(
-                f"{item['path']}: sha256 {found}, expected {item['sha256']}"
-            )
-        frame = read_recent(item)
         frame["election"] = item["election"]
         frames.append(frame)
     tcpd = pd.concat(frames, ignore_index=True)

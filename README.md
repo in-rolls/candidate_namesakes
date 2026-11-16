@@ -110,7 +110,7 @@ suggestive, not proof of planting.
 | Assembly   | alias         |                               9.8 |                              5.4 |    1.81 |
 | Assembly   | initials      |                              23.2 |                             11.1 |    2.10 |
 | Assembly   | lookalike     |                              47.9 |                             27.9 |    1.72 |
-| Lok Sabha  | exact         |                               7.6 |                              2.9 |    2.57 |
+| Lok Sabha  | exact         |                               7.6 |                              2.9 |    2.58 |
 | Lok Sabha  | spelling      |                               8.7 |                              3.5 |    2.49 |
 | Lok Sabha  | alias         |                               8.7 |                              3.5 |    2.50 |
 | Lok Sabha  | initials      |                              22.0 |                              7.0 |    3.14 |
@@ -251,32 +251,14 @@ Uttar Pradesh assembly rows match TCPD files downloaded in April 2023 except
 one 1995 row TCPD has since corrected. Paths, URLs and SHA-256 are in
 `data/source.json`; `make fetch` retrieves them.
 
-After TCPD's coverage ends, results come from the Election Commission's own
-publications, through three routes:
-
-- Lok Sabha 2024: ECI Statistical Report, report 33, "Constituency Wise
-  Detailed Result" (8,359 candidates in 542 seats; Surat was uncontested).
-  The copy used is the one in `in-rolls/wasted_votes` (committed 2025-08-23);
-  where it was downloaded from was not recorded. A second copy, scraped from
-  the results site by `thecont1/india-votes-data`, agrees on 8,803 candidates;
-  the rest differ in spelling (the results site cuts long names short) and
-  1.2% of matched vote totals differ, so the statistical report is used.
-- Assemblies of 2024-2026 (Haryana, Jharkhand, Jammu and Kashmir, Maharashtra,
-  Bihar, Delhi, Assam, Kerala, Puducherry, Tamil Nadu, West Bengal):
-  [`thecont1/india-votes-data`](https://github.com/thecont1/india-votes-data)
-  (MIT) at commit `7d8cf63`, scraped from results.eci.gov.in; every seat of
-  each election is present.
-- Assemblies of June 2024 (Andhra Pradesh, Odisha, Arunachal Pradesh, Sikkim):
-  the constituency pages of results.eci.gov.in as kept by the Internet
-  Archive's Wayback Machine, fetched by
-  [`fetch_wayback.py`](src/candidate_namesakes/fetch_wayback.py) and parsed by
-  [`parse_wayback.py`](src/candidate_namesakes/parse_wayback.py), which checks
-  each page's final counting round, its NOTA row and its total.
-- Not covered: the December 2023 assemblies. The results site no longer serves
-  them, eci.gov.in refuses scripted downloads, and the Wayback Machine holds
-  only part of each (Rajasthan 124 of 199 seats, Telangana 51 of 119, Madhya
-  Pradesh 44 of 230, Chhattisgarh 16 of 90, Mizoram 2 of 40). ECI's
-  statistical reports for them, downloaded by hand, would close the gap.
+After TCPD's coverage ends, results come from
+[in-rolls/eci_results](https://github.com/in-rolls/eci_results) (commit
+`d89b109`): the 2024 Lok Sabha and the 2024-2026 assemblies from the Election
+Commission's report and results website, in TCPD's column layout, so the two
+are appended without reshaping. Its README documents sources, checks and the
+columns it leaves empty. Not yet covered there: the November-December 2023
+assemblies (Rajasthan, Madhya Pradesh, Chhattisgarh, Telangana, Mizoram) and
+by-elections.
 
 ## Prior work
 
