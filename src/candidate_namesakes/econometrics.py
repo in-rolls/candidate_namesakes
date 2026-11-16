@@ -26,6 +26,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pyfixest as pf
+from rapidfuzz import fuzz
 
 from candidate_namesakes import plotstyle
 from candidate_namesakes.check_votes import contests_with_votes, resemblance_to
@@ -142,6 +143,70 @@ def _sample(ind):
     return d
 
 
+# ECI's national parties from its order of 10 April 2023 (BJP, INC, BSP,
+# CPI(M), AAP, NPP), by TCPD-PPI Party_ID; TCPD's own flag covers earlier years.
+NATIONAL_2023 = {1605, 3482, 16651, 14635, 13, 5671}
+INCUMBENT_SIMILARITY = 90
+
+
+def mark_incumbents(usable):
+    """Flag the candidate who won the seat's previous general election.
+
+    TCPD links candidates across elections by a person ID that the post-2023
+    files lack, so one rule is used for every year: in each contest, the
+    candidate whose name is most similar to the previous general election's
+    winner of the same seat (rapidfuzz token-set ratio of at least 90, seat
+    boundaries unchanged), ties going to the winner's party. Party is known
+    before the vote; votes are not. At most one per contest, so a namesake of
+    the sitting member is not also flagged. On TCPD's 2014-2023 rows this
+    agrees with TCPD's Incumbent flag for 98.6% of candidates.
+    """
+    general = usable[usable["Poll_No"] == 0]
+    seq = general["Year"] * 100 + general["month"].fillna(0)
+    polls = (
+        general.assign(seq=seq)
+        .drop_duplicates(["election", "State_Name", "seq"])[
+            ["election", "State_Name", "seq"]
+        ]
+        .sort_values("seq")
+    )
+    polls["prev_seq"] = polls.groupby(["election", "State_Name"])["seq"].shift(1)
+    rows = general.assign(seq=seq).merge(
+        polls, on=["election", "State_Name", "seq"], how="left"
+    )
+    rows.index = general.index
+    seat = ["election", "State_Name", "Constituency_No"]
+    winners = rows[rows["Position"] == 1][
+        seat + ["seq", "name_spelling", "DelimID", "Party"]
+    ].rename(
+        columns={
+            "seq": "prev_seq",
+            "name_spelling": "prev_name",
+            "DelimID": "prev_delim",
+            "Party": "prev_party",
+        }
+    )
+    rows = rows.reset_index().merge(winners, on=seat + ["prev_seq"], how="left")
+    rows = rows.set_index("index")
+    same_seat = rows["prev_name"].notna() & rows["DelimID"].eq(rows["prev_delim"])
+    score = pd.Series(0.0, index=rows.index)
+    score[same_seat] = [
+        fuzz.token_set_ratio(a, b)
+        for a, b in zip(
+            rows.loc[same_seat, "name_spelling"], rows.loc[same_seat, "prev_name"]
+        )
+    ]
+    rows["score"] = score
+    rows["same_party"] = rows["Party"].eq(rows["prev_party"])
+    best = (
+        rows[rows["score"] >= INCUMBENT_SIMILARITY]
+        .sort_values(["score", "same_party"], ascending=False)
+        .drop_duplicates(["row_id"])
+        .index
+    )
+    return usable.index.isin(best)
+
+
 def _prepare_tcpd(source):
     tcpd = read_tcpd(source)
     pairs = pd.read_parquet("data/release/tcpd/name_pairs.parquet")
@@ -157,6 +222,7 @@ def _prepare_tcpd(source):
     usable["year_frac"] = usable["Year"] + (usable["month"].fillna(1) - 1) / 12
     freq = usable["name_spelling"].value_counts()
     usable["log_name_freq"] = np.log1p(usable["name_spelling"].map(freq).fillna(0))
+    usable["is_incumbent"] = mark_incumbents(usable)
     usable["constituency"] = (
         usable["State_Name"].astype(str)
         + "|"
@@ -182,8 +248,12 @@ def _prepare_tcpd(source):
     info = usable.set_index("candidate_id")
     party = p_sym["target_id"].map(info["Party"])
     pos = p_sym["target_id"].map(info["Position"])
-    incumbent = p_sym["target_id"].map(info["Incumbent"]).astype(str) == "True"
-    national = p_sym["target_id"].map(info["Party_Type_TCPD"]) == "National Party"
+    incumbent = p_sym["target_id"].map(info["is_incumbent"]).fillna(False)
+    year = p_sym["target_id"].map(info["Year"])
+    national = p_sym["target_id"].map(info["Party_Type_TCPD"]).eq("National Party")
+    national |= year.ge(2024) & p_sym["target_id"].map(info["Party_ID"]).isin(
+        NATIONAL_2023
+    )
     is_party = party.notna() & (party != "IND")
 
     ind = usable[usable["Party"] == "IND"].copy()
@@ -505,7 +575,16 @@ def write_macros(usable, ind, d, conf, targets, photo, breaks, overturn, bihar):
         return f"{lm:.1f}", f"{mm:.1f}", f"{lm / mm:.1f}"
 
     ls, ae = ratio("lok_sabha"), ratio("assembly")
+    check = usable[usable["Year"].between(2014, 2023) & usable["Incumbent"].notna()]
+    tcpd_inc = check["Incumbent"].astype(str).eq("True")
+    ours = check["is_incumbent"]
+    late = d["Year"] >= 2024
     macros = {
+        "incAgree": f"{100 * (ours == tcpd_inc).mean():.1f}",
+        "incRecall": f"{100 * ours[tcpd_inc].mean():.0f}",
+        "incPrecision": f"{100 * tcpd_inc[ours].mean():.0f}",
+        "nExanteLate": f"{int(((d.like_exante != 'unlike') & late).sum()):,}",
+        "nLeaderLate": f"{int(((d.like_leader != 'unlike') & late).sum()):,}",
         "nTcpdCand": f"{len(usable):,}",
         "mahaMargin": f"{maha_top[0] - maha_top[1]:,.0f}",
         "mahaN": f"{len(maha_ns)}",
