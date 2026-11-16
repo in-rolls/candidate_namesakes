@@ -5,3 +5,12 @@ __pycache__/
 *.egg-info/
 /data/raw/
 /data/build/
+ms/*.aux
+ms/*.bbl
+ms/*.blg
+ms/*.fdb_latexmk
+ms/*.fls
+ms/*.log
+ms/*.out
+ms/*.xdv
+ms/*.synctex.gz

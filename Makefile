@@ -1,4 +1,4 @@
-.PHONY: fetch build check-votes tcpd figures names test lint
+.PHONY: fetch build check-votes tcpd figures names paper test lint
 
 COMMIT = 8326acf957a96a75769f973a096169f80c270270
 BASE = https://raw.githubusercontent.com/in-rolls/local_elections/$(COMMIT)/data/master
@@ -31,6 +31,10 @@ figures:
 
 names:
 	uv run python -m candidate_namesakes.inventory_names
+
+paper:
+	uv run python -m candidate_namesakes.econometrics
+	cd ms && latexmk -xelatex -interaction=nonstopmode main.tex
 
 test:
 	uv run pytest -q
