@@ -251,7 +251,7 @@ one 1995 row TCPD has since corrected. Paths, URLs and SHA-256 are in
 
 After TCPD's coverage ends, results come from
 [in-rolls/eci_results](https://github.com/in-rolls/eci_results) (commit
-`0bc2b71`): the 2024 Lok Sabha and the assemblies from November 2023 to 2026
+`d1f308a`): the 2024 Lok Sabha and the assemblies from November 2023 to 2026
 from the Election Commission's statistical reports, in TCPD's column
 layout, so the two are appended without reshaping. Its README documents
 sources, checks and the columns it leaves empty. Not covered there:

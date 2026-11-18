@@ -18,7 +18,7 @@ fetch:
 	mkdir -p data/raw/eci_results
 	for f in GE_2024 AE_2023_2026; do \
 		curl -fL -o data/raw/eci_results/$$f.csv.gz \
-			https://raw.githubusercontent.com/in-rolls/eci_results/0bc2b71/data/release/$$f.csv.gz; \
+			https://raw.githubusercontent.com/in-rolls/eci_results/d1f308a/data/release/$$f.csv.gz; \
 	done
 	shasum -a 256 $(RAW)/*.parquet data/raw/tcpd/*.csv.gz data/raw/eci_results/*.csv.gz
 
