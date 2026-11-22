@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Candidates who share a name with a rival in the same Indian local-election contest"
 readme = "README.md"
 requires-python = ">=3.12"
-authors = [{ name = "Gaurav Sood", email = "contact@gsood.com" }]
+authors = [{ name = "Gaurav Sood" }]
 license = "MIT"
 license-files = ["LICENSE"]
 keywords = ["India", "Bihar", "elections", "panchayats", "candidates", "namesakes"]
